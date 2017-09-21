@@ -1,0 +1,37 @@
+---
+title: "Getting started with dkanr"
+author: "Tony Fujs"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+`dkanr` is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html)
+
+## Set-up your connection
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+dkanr_setup(url = 'http://demo.getdkan.com',
+            username = 'my_username',
+            password = 'my_password)
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+get_url()
+get_cookie()
+get_token()
+```
+
+## Retrieve node metadata
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Retrieve metadata as JSON
+retrieve_node('35', as = 'json')
+
+# Retrieve metadata as R dkan_node object
+retrieve_node('35', as = 'list')
+```
+
