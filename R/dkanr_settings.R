@@ -66,6 +66,9 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
                            root_url = url)
     Sys.setenv("DKANR_COOKIE" = cookie)
     Sys.setenv("DKANR_TOKEN" = token)
+  } else {
+    Sys.setenv("DKANR_COOKIE" = '')
+    Sys.setenv("DKANR_TOKEN" = '')
   }
 }
 
