@@ -49,7 +49,6 @@ dkan_REQUEST <- function(verb, url, nid = NULL, body, ...) {
 cc <- function(l) Filter(Negate(is.null), l)
 dk <- function() 'api/dataset/node'
 jsl <- function(x) jsonlite::fromJSON(x, simplifyVector = FALSE)
-jsd <- function(x) jsonlite::fromJSON(x)$result
 ctj <- function() httr::content_type_json()
 aj <- function() httr::accept_json()
 
