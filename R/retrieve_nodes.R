@@ -1,4 +1,4 @@
-#' retrieve_nodes_list
+#' retrieve_nodes
 #'
 #' Returns list of nodes
 #'
@@ -7,16 +7,17 @@
 #' @param filters named character vector: filters to be applied to the search
 #' @param pagesize numeric: Number of records to get per page (max = 20).
 #' @param page numeric: The zero-based index of the page to get, defaults to 0.
+#' @param as character: Output format. Options are: 'json' or 'list'
 #' @param ... Other optional parameters to be passed to the underlying GET request
 #'
 #' @return dkan_node object
 #' @export
 #'
 #' @examples
-#' retrieve_nodes_list(url = "http://demo.getdkan.com")
-#' retrieve_nodes_list(url = "http://demo.getdkan.com", fields = c('nid', 'type', 'uri'), filters = c(type='resource'))
+#' retrieve_nodes(url = "http://demo.getdkan.com")
+#' retrieve_nodes(url = "http://demo.getdkan.com", fields = c('nid', 'type', 'uri'), filters = c(type='resource'))
 
-retrieve_nodes_list <- function(url = get_url(), fields = NULL, filters = NULL, pagesize = NULL, page = NULL, ...) {
+retrieve_nodes <- function(url = get_url(), fields = NULL, filters = NULL, pagesize = NULL, page = NULL, as = 'json', ...) {
   # Build query
   query = NULL
   if (any(!is.null(fields), !is.null(filters), !is.null(pagesize), !is.null(page))) {
@@ -29,5 +30,5 @@ retrieve_nodes_list <- function(url = get_url(), fields = NULL, filters = NULL, 
 
 
   res <- dkan_GET(url = url, query = query, ...)
-  as_dk(jsl(res), "dkan_node")
+  switch(as, json = res, list = as_dk(jsl(res), "dkan_node"))
 }
