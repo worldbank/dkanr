@@ -43,7 +43,7 @@ print.dkanr_settings <- function(x, ...) {
 #' dkanr_setup(url = "http://demo.getdkan.com")
 #'
 #' Privileged DKAN editor/admin users can run:
-#' dkanr_setup(url = "http://demo.getdkan.com", username = "your-username", password = "your-password)
+#' dkanr_setup(url = "http://demo.getdkan.com", username = "your-username", password = "your-password")
 #'
 #' Not specifying the default DKAN URL will reset the DKAN URL to its default
 #' "http://demo.getdkan.com":
@@ -79,5 +79,11 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
 #' @export
 #' @rdname dkanr_settings
 get_url <- function(){ Sys.getenv("DKANR_URL") }
+
+#' @export
+#' @rdname dkanr_settings
 get_cookie <- function(){ Sys.getenv("DKANR_COOKIE") }
+
+#' @export
+#' @rdname dkanr_settings
 get_token <- function(){ Sys.getenv("DKANR_TOKEN") }
