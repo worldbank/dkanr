@@ -66,6 +66,8 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
     message('Requesting session token')
     token <- request_token(cookie = cookie,
                            root_url = url)
+    token <- request_token(cookie = cookie,
+                           root_url = url)
     Sys.setenv("DKANR_COOKIE" = cookie)
     Sys.setenv("DKANR_TOKEN" = token)
   } else {
