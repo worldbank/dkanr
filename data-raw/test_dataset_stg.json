@@ -1,0 +1,47 @@
+{
+	"field_wbddh_data_type": {
+		"und": "294"
+	},
+	"title": "TEST DATASET",
+	"body": {
+		"und": [{
+			"value": "This is the body of the test page."
+		}]
+	},
+	"field_wbddh_data_class": {
+		"und": "358"
+	},
+  "field_wbddh_dsttl_upi": {
+    "und": {
+      "autocomplete_hidden_value": "741"
+    }
+  },
+	"field_wbddh_terms_of_use": {
+		"und": "440"
+	},
+	
+	"field_topic": {
+		"und": [
+			"366"
+		]
+	},
+	"field_frequency": {
+		"und": "3"
+	},
+	"field_wbddh_country": {
+		"und": [
+			"169"
+		]
+	},
+	"field_wbddh_economy_coverage": {
+		"und": [
+			"288"
+		]
+	},
+	"field_wbddh_languages_supported": {
+		"und": [
+			"337"
+		]
+	},
+	"type": "dataset"
+}

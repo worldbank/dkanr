@@ -1,0 +1,26 @@
+{
+  "title": "TEST - RESOURCE",
+  "field_wbddh_data_class": {
+    "und": {
+      "tid": "358"
+    }
+  },
+  "field_exception_s_": {
+    "und": {
+      "tid": "1204"
+    }
+  },
+  "field_wbddh_resource_type": {
+    "und": {
+      "tid": "443"
+    }
+  },
+  "field_link_api": {
+    "und": [
+      {
+        "url": "http://microdatalib.worldbank.org/index.php/catalog/6008"
+      }
+    ]
+  },
+  "type": "resource"
+}
