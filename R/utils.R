@@ -97,7 +97,7 @@ connect_system <- function(root_url) {
   path <- 'api/dataset/system/connect'
   url <- httr::modify_url(root_url, path = path)
 
-  body <- jsonlite::fromJSON('data-raw/system_connect.json')
+  body <- system_connect_json
   body$SystemConnect <- jsonlite::unbox(body$SystemConnect)
   body <- jsonlite::toJSON(body, pretty = TRUE)
 
@@ -117,7 +117,7 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
   path <- 'api/dataset/user/login'
   url <- httr::modify_url(root_url, path = path)
 
-  body <- jsonlite::fromJSON('data-raw/login_service.json')
+  body <- login_service_json
   body$sessid <- jsonlite::unbox(system_connect_sessid)
   body$username <- jsonlite::unbox(username)
   body$password <- jsonlite::unbox(password)
@@ -143,9 +143,6 @@ request_token <- function(cookie, root_url) {
   path <- 'services/session/token'
   url <- httr::modify_url(root_url, path = path)
 
-  out <- httr::POST(url,
-                    httr::accept_json(),
-                    httr::add_headers("Cookie" =  cookie))
   out <- httr::POST(url,
                     httr::accept_json(),
                     httr::add_headers("Cookie" =  cookie))
