@@ -13,13 +13,22 @@ vignette: >
 
 ## Set-up your connection
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 dkanr_setup(url = 'http://demo.getdkan.com',
             username = 'my_username',
             password = 'my_password)
 ```
 
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+library(dkanr)
+dkanr_setup(url = 'http://demo.getdkan.com')
+```
+
+
+
+
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
 get_url()
 get_cookie()
 get_token()

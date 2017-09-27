@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @param x Variety of things, character, list, or dkan_node class object
-#' @param ... Further args passed on to \code{\link{get_node}} if character given
+#' @param ... Further args passed on to \code{\link{retrieve_node}} if character given
 #' # create item class from only an item ID
 #' as.dkan_node("22")
 #'
@@ -13,7 +13,7 @@
 as.dkan_node <- function(x, ...) UseMethod("as.dkan_node")
 
 #' @export
-as.dkan_node.character <- function(x, ...) get_node(x, ...)
+as.dkan_node.character <- function(x, ...) retrieve_node(x, ...)
 
 #' @export
 as.dkan_node.dkan_node <- function(x, ...) x

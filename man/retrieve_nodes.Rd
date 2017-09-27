@@ -29,6 +29,10 @@ dkan_node object
 Returns list of nodes
 }
 \examples{
+\dontrun{
 retrieve_nodes(url = "http://demo.getdkan.com")
-retrieve_nodes(url = "http://demo.getdkan.com", fields = c('nid', 'type', 'uri'), filters = c(type='resource'))
+retrieve_nodes(url = "http://demo.getdkan.com",
+               fields = c('nid', 'type', 'uri'),
+               filters = c(type='resource'))
+               }
 }

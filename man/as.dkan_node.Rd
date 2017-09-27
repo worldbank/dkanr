@@ -12,7 +12,7 @@ is.dkan_node(x)
 \arguments{
 \item{x}{Variety of things, character, list, or dkan_node class object}
 
-\item{...}{Further args passed on to \code{\link{get_node}} if character given
+\item{...}{Further args passed on to \code{\link{retrieve_node}} if character given
 # create item class from only an item ID
 as.dkan_node("22")
 

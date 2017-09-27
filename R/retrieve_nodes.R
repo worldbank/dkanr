@@ -14,8 +14,12 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' retrieve_nodes(url = "http://demo.getdkan.com")
-#' retrieve_nodes(url = "http://demo.getdkan.com", fields = c('nid', 'type', 'uri'), filters = c(type='resource'))
+#' retrieve_nodes(url = "http://demo.getdkan.com",
+#'                fields = c('nid', 'type', 'uri'),
+#'                filters = c(type='resource'))
+#'                }
 
 retrieve_nodes <- function(url = get_url(), fields = NULL, filters = NULL, pagesize = NULL, page = NULL, as = 'json', ...) {
   # Build query

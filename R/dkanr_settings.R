@@ -4,15 +4,14 @@
 #' @return \code{dkanr_settings} prints your base url, API cookie and token (if used)
 #' \code{dkanr_setup} sets your production settings
 #' @seealso  \code{\link{dkanr_setup}},
-#' \code{\link{get_default_url}}, \code{\link{get_default_username}},
-#' \code{\link{get_default_password}}
+#' \code{\link{get_url}}
 #' @family dkanr settings
 #' @examples
 #' dkanr_settings()
 dkanr_settings <- function() {
-  ops <- list(url = Sys.getenv("DKANR_DEFAULT_URL", ""),
-              cookie = Sys.getenv("DKANR_DEFAULT_COOKIE", ""),
-              token = Sys.getenv("DKANR_DEFAULT_TOKEN", "")
+  ops <- list(url = Sys.getenv("DKANR_URL", ""),
+              cookie = Sys.getenv("DKANR_COOKIE", ""),
+              token = Sys.getenv("DKANR_TOKEN", "")
   )
   structure(ops, class = "dkanr_settings")
 }
@@ -39,6 +38,7 @@ print.dkanr_settings <- function(x, ...) {
 #' default to use the default URL and API key unless specified explicitly.
 #'
 #' @examples
+#' \dontrun{
 #' DKAN users without admin/editor privileges could run:
 #' dkanr_setup(url = "http://demo.getdkan.com")
 #'
@@ -48,6 +48,8 @@ print.dkanr_settings <- function(x, ...) {
 #' Not specifying the default DKAN URL will reset the DKAN URL to its default
 #' "http://demo.getdkan.com":
 #' dkanr_setup()
+#' }
+
 dkanr_setup <- function(url = "http://demo.getdkan.com",
                         username = NULL,
                         password = NULL) {

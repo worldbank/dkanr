@@ -22,5 +22,7 @@ character or dkan_node object
 Delete an exisiting DAKN node
 }
 \examples{
+\dontrun{
 delete_node(nid = 1, url = "http://demo.getdkan.com")
+}
 }

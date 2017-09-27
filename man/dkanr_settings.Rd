@@ -27,6 +27,5 @@ dkanr_settings()
 }
 \seealso{
 \code{\link{dkanr_setup}},
-\code{\link{get_default_url}}, \code{\link{get_default_username}},
-\code{\link{get_default_password}}
+\code{\link{get_url}}
 }

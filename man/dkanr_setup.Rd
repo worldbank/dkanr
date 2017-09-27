@@ -22,6 +22,7 @@ Configure default DKAN settings
 default to use the default URL and API key unless specified explicitly.
 }
 \examples{
+\dontrun{
 DKAN users without admin/editor privileges could run:
 dkanr_setup(url = "http://demo.getdkan.com")
 
@@ -31,4 +32,5 @@ dkanr_setup(url = "http://demo.getdkan.com", username = "your-username", passwor
 Not specifying the default DKAN URL will reset the DKAN URL to its default
 "http://demo.getdkan.com":
 dkanr_setup()
+}
 }

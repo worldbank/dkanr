@@ -24,5 +24,7 @@ dkan_node object
 Update an exisiting DAKN node
 }
 \examples{
+\dontrun{
 update_node(nid = 1, url = "http://demo.getdkan.com")
+}
 }

@@ -11,7 +11,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' delete_node(nid = 1, url = "http://demo.getdkan.com")
+#' }
+
 delete_node <- function(nid, url = get_url(), as = 'json', ...) {
   # CHECK: input validity
   assertthat::assert_that(!is.null(nid), msg = 'The Node ID (nid) argument must be specified')
