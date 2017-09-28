@@ -1,4 +1,4 @@
-#' retrieve_nodes
+#' list_nodes
 #'
 #' Returns list of nodes
 #'
@@ -15,13 +15,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' retrieve_nodes(url = "http://demo.getdkan.com")
-#' retrieve_nodes(url = "http://demo.getdkan.com",
+#' list_nodes(url = "http://demo.getdkan.com")
+#' list_nodes(url = "http://demo.getdkan.com",
 #'                fields = c('nid', 'type', 'uri'),
 #'                filters = c(type='resource'))
 #'                }
 
-retrieve_nodes <- function(url = get_url(), fields = NULL, filters = NULL, pagesize = NULL, page = NULL, as = 'json', ...) {
+list_nodes <- function(url = get_url(), fields = NULL, filters = NULL, pagesize = NULL, page = NULL, as = 'json', ...) {
   # Build query
   query = NULL
   if (any(!is.null(fields), !is.null(filters), !is.null(pagesize), !is.null(page))) {
