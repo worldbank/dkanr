@@ -22,24 +22,6 @@ Some features of this package include:
 
 This document covers the main services of the package and provides instructions on how to best utilize all of its offerings. 
 
-## Installation
-
-You may install the package directly from CRAN.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE, echo=TRUE}
-install.packages("dkanr")
-```
-
-<!-- This can be removed if the latest version will not be accessible-->
-Or download directly it from GitHub to access the latest developmental version.
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE, echo=TRUE}
-devtools::install_github("tfujs/dkanr")
-```
-
-Once you have downloaded the package, select the package and load. 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE, echo=TRUE}
-library(dkanr)
-```
-
 ## Setting Up Your Connection
 
 <!--Users without admin/editor privileges can still access the Data Catalog, as usernames and passwords are not required for set up.-->
