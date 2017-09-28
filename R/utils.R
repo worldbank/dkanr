@@ -122,11 +122,12 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
   body$username <- jsonlite::unbox(username)
   body$password <- jsonlite::unbox(password)
   body <- jsonlite::toJSON(body, pretty = TRUE)
+  
 
   out <- httr::POST(url,
                     httr::accept_json(),
                     httr::content_type_json(),
-                    body = body)
+                    body = list(x = '"SystemConnect":"Welcome"'))
   httr::stop_for_status(out, task = 'retrieve session ID via login service')
   out <- httr::content(out)
   login_sessid <- out$sessid
@@ -199,5 +200,45 @@ build_search_query <- function(fields,
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
   out <- stringr::str_replace_all(out, pattern = '^&|&$', replacement = '')
 
+  return(out)
+}
+
+filters_to_text_query_datastore <- function(filters) {
+  out <- purrr::map2_chr(filters, names(filters),
+                         function(x, y) {
+                           paste0('filters[', y, ']=', paste(x, collapse=','))})
+  out <- paste(out, collapse = '&')
+  
+  return(out)
+}
+
+build_read_query <- function(resource_id,
+                             fields,
+                             filters,
+                             offset,
+                             limit) {
+  # resource_id
+  resource_id_text <- paste0('resource_id=', resource_id)
+  # fields
+  if (!is.null(fields)) {
+    fields_text <- paste(fields, collapse = ',')
+    fields_text <- paste0('fields=', fields_text)
+  } else {
+    fields_text <- NULL
+  }
+  # filters
+  if (!is.null(filters)) {
+    filters_text <- filters_to_text_query_datastore(filters)
+  } else {
+    filters_text <- NULL
+  }
+  # offset
+  offset_text <- paste0('offset=', offset)
+  
+  out <- paste(resource_id_text, fields_text, filters_text, offset_text, sep = '&')
+  # out <- stringr::str_replace_all(out, pattern = ' ', replacement = '')
+  out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
+  # out <- stringr::str_replace_all(out, pattern = '^&|&$', replacement = '')
+  
   return(out)
 }
