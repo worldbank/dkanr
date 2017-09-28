@@ -2,12 +2,12 @@
 #'
 #' @export
 #' @param x Variety of things, character, list, or dkan_list class object
-#' @param ... Further args passed on to \code{\link{retrieve_nodes}} if character given
+#' @param ... Further args passed on to \code{\link{retrieve_node}} if character given
 
 as.dkan_list <- function(x, ...) UseMethod("as.dkan_list")
 
 #' @export
-as.dkan_list.character <- function(x, ...) retrieve_nodes(x, ...)
+as.dkan_list.character <- function(x, ...) retrieve_node(x, ...)
 
 #' @export
 as.dkan_list.dkan_list <- function(x, ...) x

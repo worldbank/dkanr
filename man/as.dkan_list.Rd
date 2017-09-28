@@ -12,7 +12,7 @@ is.dkan_list(x)
 \arguments{
 \item{x}{Variety of things, character, list, or dkan_list class object}
 
-\item{...}{Further args passed on to \code{\link{retrieve_nodes}} if character given}
+\item{...}{Further args passed on to \code{\link{retrieve_node}} if character given}
 }
 \description{
 dkan_list class helpers
