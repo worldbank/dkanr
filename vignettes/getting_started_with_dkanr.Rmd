@@ -16,9 +16,9 @@ The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedo
 
 Some features of this package include:
 
-    * Uploading content
-    * Authorized access to catalog
-    * Updating data
+* Uploading content
+* Authorized access to catalog
+* Updating data
 
 This document covers the main services of the package and provides instructions on how to best utilize all of its offerings. 
 
