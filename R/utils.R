@@ -197,7 +197,8 @@ build_search_query <- function(fields,
   }
 
   out <- paste(fields_text, filters_text, pagesize_text, page_text, sep = "&")
-  out <- stringr::str_replace_all(out, pattern = " ", replacement = "")
+  out <- stringr::str_trim(out)
+  out <- stringr::str_replace_all(out, pattern = " ", replacement = "%20")
   out <- stringr::str_replace_all(out, pattern = "&+", replacement = "&")
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
 
