@@ -33,6 +33,3 @@ print.dkan_node <- function(x, ...) {
   cat("  UUID: ", x$uuid, "\n", sep = "")
   cat("  Created/Modified: ", x$created, " / ", x$changed, "\n", sep = "")
 }
-
-
-

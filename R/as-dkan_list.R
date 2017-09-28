@@ -25,6 +25,3 @@ print.dkan_list <- function(x, ...) {
   cat("  First node: ", x[[1]]$nid, "\n", sep = "")
   cat("  Last node: ", x[[length(x)]]$nid, "\n", sep = "")
 }
-
-
-

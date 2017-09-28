@@ -13,20 +13,22 @@
 attach_file_to_node <- function(nid, url = get_url(), file_path, attach = 1) {
 
   # construct the body of the POST request
-  body = list('files[1]' = httr::upload_file(file_path), 'field_name' = c('field_upload'), 'attach' = attach)
+  body <- list("files[1]" = httr::upload_file(file_path),
+              "field_name" = c("field_upload"),
+              "attach" = attach)
 
   # build query
-  path <- paste0('api/dataset/node/', nid, '/attach_file')
+  path <- paste0("api/dataset/node/", nid, "/attach_file")
   url <- httr::modify_url(url, path = path)
 
   # Get credentials
-  cookie = Sys.getenv("DKANR_COOKIE")
-  token = Sys.getenv("DKANR_TOKEN")
+  cookie <- Sys.getenv("DKANR_COOKIE")
+  token <- Sys.getenv("DKANR_TOKEN")
 
   res <- httr::POST(url = url,
-                    httr::add_headers(.headers = c('Content-Type' = 'multipart/form-data',
-                                                   'Cookie' =  cookie,
-                                                   'X-CSRF-Token' = token)),
+                    httr::add_headers(.headers = c("Content-Type" = "multipart/form-data",
+                                                   "Cookie" =  cookie,
+                                                   "X-CSRF-Token" = token)),
                     body = body)
 
   err_handler(res)
