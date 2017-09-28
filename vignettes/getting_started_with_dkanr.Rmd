@@ -4,43 +4,135 @@ author: "Tony Fujs"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to dkanr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-`dkanr` is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html)
+## Introduction to dkanr
 
-## Set-up your connection
+<!--The World Bank's [Data Catalog](***include updated url***) is an aggregate catalog of multiple resources, including open and closed data sets.-->
+The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
-dkanr_setup(url = 'http://demo.getdkan.com',
-            username = 'my_username',
-            password = 'my_password)
+Some features of this package include:
+
+    * Uploading content
+    * Authorized access to catalog
+    * Updating data
+
+This document covers the main services of the package and provides instructions on how to best utilize all of its offerings. 
+
+## Installation
+
+You may install the package directly from CRAN.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE, echo=TRUE}
+install.packages("dkanr")
 ```
 
-```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+<!-- This can be removed if the latest version will not be accessible-->
+Or download directly it from GitHub to access the latest developmental version.
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE, echo=TRUE}
+devtools::install_github("tfujs/dkanr")
+```
+
+Once you have downloaded the package, select the package and load. 
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE, echo=TRUE}
 library(dkanr)
+```
+
+## Setting Up Your Connection
+
+<!--Users without admin/editor privileges can still access the Data Catalog, as usernames and passwords are not required for set up.-->
+
+Depending on the catalog, you access it with no authentication required. It is important to remember that these URLs are required to include `"http://"` or `"https://"` dependant on the site.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 dkanr_setup(url = 'http://demo.getdkan.com')
 ```
 
-
-
-
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-
-get_url()
-get_cookie()
-get_token()
+For resources with restricted privileges, such as admin or editor rights, and/or required authentication, you must authenticate before accessing the repository. This can be done by including your username and password.
+<!--More information about your credentials can be accessed through your [account](*****). -->
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+dkanr_setup(url = 'http://demo.getdkan.com',
+            username = 'my_username',
+            password = 'my_password')
 ```
 
-## Retrieve node metadata
+The following function prints your step up connection information.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-# Retrieve metadata as JSON
-retrieve_node('35', as = 'json')
-
-# Retrieve metadata as R dkan_node object
-retrieve_node('35', as = 'list')
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+dkanr_settings()
 ```
 
+## CRUD Cycle Functions
+<!-- would you like me to change the language to destory?-->
+The key features of `dkanr` allow you to Create, Retrieve, Update, and Delete (CRUD) content from the DKAN site. 
+
+### Create a node with `create_node()`
+
+Users can create a node using the create_node() function. Let's say we want to contribute a new JSON resource on a site. We can take our JSON and pass that information.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+json_code = '{"title" : "Sample Resource",
+                    "date" : "Sample Date"}'
+create_node(body = json_code)
+```
+
+### Retrieve metadata with `retrieve_node()`
+
+The retrieve_node function creates a GET request to collect metadata information about a specific, existing node. For example, if we were to select information with the node ID of `"35"` with the output format in JSON.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+retrieve_node(nid='35', 
+              as = 'json')
+```
+
+You may also include additional parameters to specify your result. Here we are retrieving a subset of node `"35"`'s metadata, with the output in a list format, by passing two additional parameters.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+retrieve_node(nid='35', 
+              as = 'list',
+              title = 'Test Title',
+              year = '1900')
+```
+
+
+### Retrieve nodes with `retrieve_nodes()`
+
+When you are browsing or compiling information about nodes with similar characteristics, you can retrieve multiple nodes that fit your search query. 
+
+The example below shows how you can search for node IDs that pertain to `"R"` and `"RStudio"`. Both the `fields=` and `filters=` parameters take vector types.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+retrieve_nodes(fields = c('nid'),
+               filters = c('RStudio', 'R'))
+```
+
+You can also adjust the pagination of your search results based on the page value, which begins at 0, as well as the number of results per page. Here we are performing a similar query, filtering based on results on page `5` and where they are organized to have `10` records per page. 
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+retrieve_nodes(fields = c('nid'),
+               filters = c('RStudio', 'R'),
+               pagesize = 5
+               page = 10)
+```
+
+Similar to the `retrieve_node()` function, the output can be in JSON or list type format using the `as=` parameter.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+retrieve_nodes(fields = c('nid', 'type', 'uri'),
+               filters = c('RStudio', 'R'),
+               as = 'json')
+```
+
+### Update a node with `update_node()`
+
+To update information for an existing node, pass a JSON object. Say we would like to revise the title for node `"35"`, we can accomplish this by passing the updated JSON to the update function. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+json_update = '{"title" : "Sample Resource V.2"}'
+update_node(nid = '35', 
+            body = json_update,
+            update = 'list')
+```
+### Remove a node with `delete_node`
+To completely remove a node, you must have the specific node ID. 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+delete_node(nid='35')
+```
