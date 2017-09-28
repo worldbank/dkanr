@@ -1,5 +1,5 @@
 # dkanr
-======
+
 ## Overview
 
 The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
