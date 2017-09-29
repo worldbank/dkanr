@@ -24,7 +24,7 @@
 #           root_url = get_url(),
 #           as = 'df')
 
-read_file <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
+read_file <- function(resource_id,
                       fields = NULL,
                       filters = NULL,
                       offset = 0,
