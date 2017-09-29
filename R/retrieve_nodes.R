@@ -32,7 +32,6 @@ retrieve_nodes <- function(url = get_url(), fields = NULL, filters = NULL, pages
                                page = page)
   }
 
-
   res <- dkan_GET(url = url, query = query, ...)
   switch(as, json = res, list = as_dk(jsl(res), "dkan_node"))
 }
