@@ -215,15 +215,6 @@ filters_to_text_query_datastore <- function(filters, text) {
   return(out)
 }
 
-sort_to_text_query <- function(filters) {
-  out <- purrr::map2_chr(filters, names(filters),
-                         function(x, y) {
-                           paste0('sort[', y, ']=', x)})
-  out <- paste(out, collapse = '&')
-  
-  return(out)
-}
-
 build_read_query <- function(resource_id,
                              fields,
                              filters,
@@ -261,13 +252,13 @@ build_read_query <- function(resource_id,
     query_text <- paste0('query=', q)
   }
   else{
-    query_tex <- NULL
+    query_text <- NULL
   }
   
   out <- paste(resource_id_text, fields_text, filters_text, offset_text, limit_text, sort_text, query_text, sep = '&')
-  # out <- stringr::str_replace_all(out, pattern = ' ', replacement = '')
+  out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
-  # out <- stringr::str_replace_all(out, pattern = '^&|&$', replacement = '')
+  out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
   
   return(out)
 }
