@@ -56,14 +56,14 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
 
   Sys.setenv("DKANR_URL" = url)
   if (!is.null(username) & !is.null(password)) {
-    message('Opening anonymous session')
+    message("Opening anonymous session")
     sessid <- connect_system(root_url = url)
-    message('Requesting session cookie')
+    message("Requesting session cookie")
     cookie <- login_service(system_connect_sessid = sessid,
                             username = username,
                             password = password,
                             root_url = url)
-    message('Requesting session token')
+    message("Requesting session token")
     token <- request_token(cookie = cookie,
                            root_url = url)
     token <- request_token(cookie = cookie,
@@ -71,8 +71,8 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
     Sys.setenv("DKANR_COOKIE" = cookie)
     Sys.setenv("DKANR_TOKEN" = token)
   } else {
-    Sys.setenv("DKANR_COOKIE" = '')
-    Sys.setenv("DKANR_TOKEN" = '')
+    Sys.setenv("DKANR_COOKIE" = "")
+    Sys.setenv("DKANR_TOKEN" = "")
   }
 }
 
@@ -82,12 +82,18 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
 #
 #' @export
 #' @rdname dkanr_settings
-get_url <- function(){ Sys.getenv("DKANR_URL") }
+get_url <- function() {
+  Sys.getenv("DKANR_URL")
+  }
 
 #' @export
 #' @rdname dkanr_settings
-get_cookie <- function(){ Sys.getenv("DKANR_COOKIE") }
+get_cookie <- function() {
+  Sys.getenv("DKANR_COOKIE")
+  }
 
 #' @export
 #' @rdname dkanr_settings
-get_token <- function(){ Sys.getenv("DKANR_TOKEN") }
+get_token <- function() {
+  Sys.getenv("DKANR_TOKEN")
+  }

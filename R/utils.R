@@ -22,8 +22,8 @@ dkan_REQUEST <- function(verb, url, nid = NULL, body, ...) {
   } else {
     url <- file.path(url, dk(), nid)
   }
-  cookie = Sys.getenv("DKANR_COOKIE")
-  token = Sys.getenv("DKANR_TOKEN")
+  cookie <- Sys.getenv("DKANR_COOKIE")
+  token <- Sys.getenv("DKANR_TOKEN")
   if (token == "") {
     # no authentication
     if (is.null(body) || length(body) == 0) {
@@ -47,7 +47,7 @@ dkan_REQUEST <- function(verb, url, nid = NULL, body, ...) {
 
 # Helpers
 cc <- function(l) Filter(Negate(is.null), l)
-dk <- function() 'api/dataset/node'
+dk <- function() "api/dataset/node"
 jsl <- function(x) jsonlite::fromJSON(x, simplifyVector = FALSE)
 ctj <- function() httr::content_type_json()
 aj <- function() httr::accept_json()
@@ -61,9 +61,10 @@ err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
       err <- jsonlite::fromJSON(httr::content(x, "text", encoding = "UTF-8"))$form_errors
-      errmsg <- paste('error:', err[[1]])
+      errmsg <- paste("error:", err[[1]])
       list(err = err, errmsg = errmsg)
-    }, silent = TRUE)
+    },
+    silent = TRUE)
     if (class(obj) != "try-error") {
       stop(sprintf("%s - %s",
                    httr::http_status(x)$message,
@@ -94,7 +95,7 @@ notrail <- function(x) {
 
 connect_system <- function(root_url) {
   # Build url
-  path <- 'api/dataset/system/connect'
+  path <- "api/dataset/system/connect"
   url <- httr::modify_url(root_url, path = path)
 
   body <- system_connect_json
@@ -105,7 +106,7 @@ connect_system <- function(root_url) {
                     httr::accept_json(),
                     httr::content_type_json(),
                     body = body)
-  httr::stop_for_status(out, task = 'connect to DDH')
+  httr::stop_for_status(out, task = "connect to DDH")
   out <- httr::content(out)
   out <- out$sessid
 
@@ -114,7 +115,7 @@ connect_system <- function(root_url) {
 
 login_service <- function(system_connect_sessid, username, password, root_url) {
   # Build url
-  path <- 'api/dataset/user/login'
+  path <- "api/dataset/user/login"
   url <- httr::modify_url(root_url, path = path)
 
   body <- login_service_json
@@ -127,12 +128,12 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
   out <- httr::POST(url,
                     httr::accept_json(),
                     httr::content_type_json(),
-                    body = list(x = '"SystemConnect":"Welcome"'))
-  httr::stop_for_status(out, task = 'retrieve session ID via login service')
+                    body = body)
+  httr::stop_for_status(out, task = "retrieve session ID via login service")
   out <- httr::content(out)
   login_sessid <- out$sessid
   login_sessname <- out$session_name
-  cookie <- paste0(login_sessname, '=', login_sessid)
+  cookie <- paste0(login_sessname, "=", login_sessid)
 
   return(cookie)
 }
@@ -141,13 +142,13 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
 request_token <- function(cookie, root_url) {
 
   # Build url
-  path <- 'services/session/token'
+  path <- "services/session/token"
   url <- httr::modify_url(root_url, path = path)
 
   out <- httr::POST(url,
                     httr::accept_json(),
                     httr::add_headers("Cookie" =  cookie))
-  httr::stop_for_status(out, task = 'retrieve token')
+  httr::stop_for_status(out, task = "retrieve token")
 
   out <- httr::content(out)
 
@@ -158,8 +159,9 @@ request_token <- function(cookie, root_url) {
 filters_to_text_query <- function(filters) {
   out <- purrr::map2_chr(filters, names(filters),
                          function(x, y) {
-                           paste0('parameters[', y, ']=', x)})
-  out <- paste(out, collapse = '&')
+                           paste0("parameters[", y, "]=", x)
+                           })
+  out <- paste(out, collapse = "&")
 
   return(out)
 }
@@ -171,8 +173,8 @@ build_search_query <- function(fields,
                                page) {
   # fields
   if (!is.null(fields)) {
-    fields_text <- paste(fields, collapse = ',')
-    fields_text <- paste0('fields=', fields_text)
+    fields_text <- paste(fields, collapse = ",")
+    fields_text <- paste0("fields=", fields_text)
   } else {
     fields_text <- NULL
   }
@@ -184,21 +186,22 @@ build_search_query <- function(fields,
   }
   # pagesize
   if (!is.null(pagesize)) {
-    pagesize_text <- paste0('pagesize=', pagesize)
+    pagesize_text <- paste0("pagesize=", pagesize)
   } else {
     pagesize_text <- NULL
   }
   # page
   if (!is.null(page)) {
-    page_text <- paste0('page=', page)
+    page_text <- paste0("page=", page)
   } else {
     page_text <- NULL
   }
 
-  out <- paste(fields_text, filters_text, pagesize_text, page_text, sep = '&')
-  out <- stringr::str_replace_all(out, pattern = ' ', replacement = '')
-  out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
-  out <- stringr::str_replace_all(out, pattern = '^&|&$', replacement = '')
+  out <- paste(fields_text, filters_text, pagesize_text, page_text, sep = "&")
+  out <- stringr::str_trim(out)
+  out <- stringr::str_replace_all(out, pattern = " ", replacement = "%20")
+  out <- stringr::str_replace_all(out, pattern = "&+", replacement = "&")
+  out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
 
   return(out)
 }
