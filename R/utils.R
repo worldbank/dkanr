@@ -155,17 +155,14 @@ request_token <- function(cookie, root_url) {
   return(out)
 }
 
-
-filters_to_text_query <- function(filters) {
+filters_to_text_query <- function(filters, text) {
   out <- purrr::map2_chr(filters, names(filters),
                          function(x, y) {
-                           paste0("parameters[", y, "]=", x)
-                           })
-  out <- paste(out, collapse = "&")
-
+                           paste0(text, '[', y, ']=', paste(x, collapse=','))})
+  out <- paste(out, collapse = '&')
+  
   return(out)
 }
-
 
 build_search_query <- function(fields,
                                filters,
@@ -180,7 +177,7 @@ build_search_query <- function(fields,
   }
   # filters
   if (!is.null(filters)) {
-    filters_text <- filters_to_text_query(filters)
+    filters_text <- filters_to_text_query(filters, 'parameters')
   } else {
     filters_text <- NULL
   }
@@ -206,20 +203,9 @@ build_search_query <- function(fields,
   return(out)
 }
 
-filters_to_text_query_datastore <- function(filters, text) {
-  out <- purrr::map2_chr(filters, names(filters),
-                         function(x, y) {
-                           paste0(text, '[', y, ']=', paste(x, collapse=','))})
-  out <- paste(out, collapse = '&')
-  
-  return(out)
-}
-
-build_read_query <- function(resource_id,
+build_ds_search_query <- function(resource_id,
                              fields,
                              filters,
-                             offset,
-                             limit,
                              sort_by,
                              q) {
   # resource_id
@@ -233,17 +219,13 @@ build_read_query <- function(resource_id,
   }
   # filters
   if (!is.null(filters)) {
-    filters_text <- filters_to_text_query_datastore(filters, 'filter')
+    filters_text <- filters_to_text_query(filters, 'filters')
   } else {
     filters_text <- NULL
   }
-  # offset
-  offset_text <- paste0('offset=', offset)
-  # limit
-  limit_text <- paste0('limit=', limit)
   # sort
   if (!is.null(sort_by)) {
-    sort_text <- filters_to_text_query_datastore(sort_by, 'sort')
+    sort_text <- filters_to_text_query(sort_by, 'sort')
   } else {
     sort_text <- NULL
   }
@@ -255,7 +237,7 @@ build_read_query <- function(resource_id,
     query_text <- NULL
   }
   
-  out <- paste(resource_id_text, fields_text, filters_text, offset_text, limit_text, sort_text, query_text, sep = '&')
+  out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, sep = '&')
   out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")

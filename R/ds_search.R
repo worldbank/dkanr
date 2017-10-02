@@ -1,4 +1,4 @@
-#' read_file
+#' ds_search
 #'
 #' Reads the file associated with a given resource id.
 #'
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' read_file(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
+#' ds_search(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
 #           fields = c('Country','City','Region','Population'),
 #           filters = list('Country'=c('co','my'), 'Region'=c('04','09','22')),
 #           offset = 0,
@@ -24,12 +24,11 @@
 #           root_url = get_url(),
 #           as = 'df')
 
-read_file <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
+ds_search <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
                       fields = NULL,
                       filters = NULL,
                       offset = 0,
                       num_records = NULL,
-                      limit = 100,
                       sort_by = NULL,
                       q = NULL,
                       root_url = get_url(),
@@ -41,14 +40,11 @@ read_file <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
   # DKAN settings
   path = 'api/action/datastore/search.json'
   DKAN_PAGE_LIMIT = 100
-  if(limit > DKAN_PAGE_LIMIT){
-    limit <- DKAN_PAGE_LIMIT
-  }
   
   # get the total number of records if user has not specified num_records
   if(is.null(num_records)) {
-    query <- build_read_query(resource_id, fields, filters,
-                              offset, limit, sort_by, q)
+    query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
+    query <- paste0(query, '&offset=', offset)
     url <- httr::modify_url(root_url, path = path, query = query)
     res <- httr::GET(url = url,
                      httr::add_headers(.headers = c('Content-Type' = 'application/json',
@@ -60,16 +56,18 @@ read_file <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
   }
   
   # get the data
-  iterations <- ceiling(num_records / limit)
+  iterations <- ceiling(num_records / DKAN_PAGE_LIMIT)
   out <- vector(mode = 'list', length = num_records)
   num_records_covered = 0
   
+  # build the url
+  query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
+  
   for (i in 1:iterations) {
     # reset the limit based on number of records left
-    limit <- min(num_records-num_records_covered, limit)
-    # build the url
-    query <- build_read_query(resource_id, fields, filters,
-                              offset, limit, sort_by, q)
+    limit <- min(num_records-num_records_covered, DKAN_PAGE_LIMIT)
+    query <- paste0(query, '&offset=', offset)
+    query <- paste0(query, '&limit=', limit)
     url <- httr::modify_url(root_url, path = path, query = query)
     # execute the query
     res <- httr::GET(url = url,
