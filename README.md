@@ -27,3 +27,11 @@ Once you have downloaded the package, select the package and load.
 ```r
 library(dkanr)
 ```
+
+## Vignettes
+
+To learn more about the features and functionalities of the package, there are a few [vignettes](https://github.com/tonyfujs/dkanr/tree/master/vignettes) available to provide basic guidelines to the package.
+
+``r
+browseVignettes(package = "dkanr")
+```
