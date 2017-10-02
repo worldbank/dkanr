@@ -11,29 +11,27 @@ vignette: >
 
 ## Introduction to dkanr
 
-<!--The World Bank's [Data Catalog](***include updated url***) is an aggregate catalog of multiple resources, including open and closed data sets.-->
 The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
 
 Some features of this package include:
 
-* Uploading content
+* Uploading datasets
 * Authorized access to catalog
-* Updating data
+* Updating resources
 
-This document covers the main services of the package and provides instructions on how to best utilize all of its offerings. 
+This document covers the main services of the package and provides instructions on how to best utilize all of its offerings.
 
 ## Setting Up Your Connection
 
-<!--Users without admin/editor privileges can still access the Data Catalog, as usernames and passwords are not required for set up.-->
+Depending on the catalog, you can access its contents with no authentication required. It is important to remember that these URLs are must include `"http://"` or `"https://"`, dependent on the site.
 
-Depending on the catalog, you access it with no authentication required. It is important to remember that these URLs are required to include `"http://"` or `"https://"` dependant on the site.
-
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(dkanr)
 dkanr_setup(url = 'http://demo.getdkan.com')
 ```
 
 For resources with restricted privileges, such as admin or editor rights, and/or required authentication, you must authenticate before accessing the repository. This can be done by including your username and password.
-<!--More information about your credentials can be accessed through your [account](*****). -->
+
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 dkanr_setup(url = 'http://demo.getdkan.com',
             username = 'my_username',
@@ -46,13 +44,62 @@ The following function prints your step up connection information.
 dkanr_settings()
 ```
 
-## CRUD Cycle Functions
-<!-- would you like me to change the language to destory?-->
-The key features of `dkanr` allow you to Create, Retrieve, Update, and Delete (CRUD) content from the DKAN site. 
+## CRUD Functions
+For most data warehouses and repositories, there are four main functions content from the DKAN site which are represented in the acronym CRUD.
+
+**CRUD** methodology stands for:
+
+* **C**reate: adding new objects to the repository
+* **R**etrieve: provide information about object(s)
+* **U**pdate: modify an object's entry
+* **D**elete: removes record from the repository
+
+The key features of `dkanr` allow you to perform basic CRUD operations on the catalog.
+
+### Search the catalog with `list_all_nodes()`
+While exploring the offerings of a catalog, you can retrive all the nodes in a simple query.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+list_all_nodes()
+```
+
+A search query can be built by using the `list_all_nodes()` function, where the function will return information from all the results pages, based on the filters and fields selected. This function takes character vectors for the filters and fields parameters. These results can be returned in JSON format as well as in list format. For example, say we would like to view all the nodes with the title `Florida Bike Lanes` on the demo DKAN site in JSON format.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+list_all_nodes(filters = c(title = 'Florida Bike Lanes'),
+           as = 'json')
+```
+
+You can also build a query with multiple elements in the filters vector. Using the framework above, you can specify your results even more.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+list_all_nodes(filters = c(title = 'Florida Bike Lanes',
+                           type = 'dataset'),
+           as = 'list')
+```
+Combining parameter elements can yield more specific results by selecting a subset of fields to view. In this example, we are only looking at the node IDs and returning the results in list format.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+list_all_nodes(fields = c('nid'),
+           filters = c(title = 'Florida Bike Lanes'),
+           as = 'json')
+```
+
+There are specific fields that will allow you to subset the results. In this case, only node ID, type, and title have been selected.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+list_all_nodes(fields = c('nid', 'type', 'title'),
+           filters = c(title = 'Florida Bike Lanes'),
+           as = 'json')
+```
+
+### Retrieve metadata with `retrieve_node()`
+The retrieve_node function creates a GET request to collect metadata information about a specific, existing node. For example, if we were to select information with the node ID of `'35'` with the output format in JSON.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+retrieve_node(nid ='35',
+              as = 'json')
+```
 
 ### Create a node with `create_node()`
 
-Users can create a node using the create_node() function. Let's say we want to contribute a new JSON resource on a site. We can take our JSON and pass that information.
+Users can add datasets and resources by creating nodes. Let's say we want to contribute a new JSON resource on a site. We can take our JSON and pass that element to the function call.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 json_code = '{"title" : "Sample Resource",
@@ -60,61 +107,20 @@ json_code = '{"title" : "Sample Resource",
 create_node(body = json_code)
 ```
 
-### Retrieve metadata with `retrieve_node()`
-
-The retrieve_node function creates a GET request to collect metadata information about a specific, existing node. For example, if we were to select information with the node ID of `"35"` with the output format in JSON.
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
-retrieve_node(nid='35', 
-              as = 'json')
-```
-
-You may also include additional parameters to specify your result. Here we are retrieving a subset of node `"35"`'s metadata, with the output in a list format, by passing two additional parameters.
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
-retrieve_node(nid='35', 
-              as = 'list',
-              title = 'Test Title',
-              year = '1900')
-```
-
-
-### Retrieve nodes with `retrieve_nodes()`
-
-When you are browsing or compiling information about nodes with similar characteristics, you can retrieve multiple nodes that fit your search query. 
-
-The example below shows how you can search for node IDs that pertain to `"R"` and `"RStudio"`. Both the `fields=` and `filters=` parameters take vector types.
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
-retrieve_nodes(fields = c('nid'),
-               filters = c('RStudio', 'R'))
-```
-
-You can also adjust the pagination of your search results based on the page value, which begins at 0, as well as the number of results per page. Here we are performing a similar query, filtering based on results on page `5` and where they are organized to have `10` records per page. 
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
-retrieve_nodes(fields = c('nid'),
-               filters = c('RStudio', 'R'),
-               pagesize = 5
-               page = 10)
-```
-
-Similar to the `retrieve_node()` function, the output can be in JSON or list type format using the `as=` parameter.
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
-retrieve_nodes(fields = c('nid', 'type', 'uri'),
-               filters = c('RStudio', 'R'),
-               as = 'json')
-```
-
 ### Update a node with `update_node()`
 
-To update information for an existing node, pass a JSON object. Say we would like to revise the title for node `"35"`, we can accomplish this by passing the updated JSON to the update function. 
+To update information for an existing node, pass a JSON object. Say we would like to revise the title for node `"200"`, we can accomplish this by passing the updated JSON to the update function.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 json_update = '{"title" : "Sample Resource V.2"}'
-update_node(nid = '35', 
+update_node(nid = '200',
             body = json_update,
-            update = 'list')
+            as = 'list')
 ```
 ### Remove a node with `delete_node`
-To completely remove a node, you must have the specific node ID. 
+To completely remove a node, you must have the specific node ID when calling the function.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
-delete_node(nid='35')
+delete_node(nid ='35',
+            as = 'json')
 ```
