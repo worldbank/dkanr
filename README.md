@@ -28,9 +28,9 @@ Once you have downloaded the package, select the package and load.
 library(dkanr)
 ```
 
-## Vignettes
+## Getting started with dkanr
 
-To learn more about the features and functionalities of the package, there are a few [vignettes](https://github.com/tonyfujs/dkanr/tree/master/vignettes) available for basic guidelines on how to use the package.
+To learn more about the features and functionalities of the package, view the Getting Started with dkanr [vignette](https://github.com/tonyfujs/dkanr/blob/master/vignettes/getting_started_with_dkanr.Rmd) for basic guidelines on how to use the package.
 
 ```r
 browseVignettes(package = "dkanr")
