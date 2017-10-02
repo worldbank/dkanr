@@ -32,6 +32,6 @@ library(dkanr)
 
 To learn more about the features and functionalities of the package, there are a few [vignettes](https://github.com/tonyfujs/dkanr/tree/master/vignettes) available to provide basic guidelines to the package.
 
-``r
+```r
 browseVignettes(package = "dkanr")
 ```
