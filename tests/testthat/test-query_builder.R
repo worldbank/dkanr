@@ -2,7 +2,7 @@ context('query_builder')
 
 # Define constant values
 demo_url = 'http://demo.getdkan.com/'
-node_title = 'Florida Bike Lanes'
+node_title = 'U.S. Adult Smoking Rate'
 node_type = 'resource'
 node_lang = 'und'
 node_field = c('nid')
@@ -14,7 +14,7 @@ node_pagesize = 10
   test_that('Single filters are correctly built', {
     expect_equal(
         filters_to_text_query(filters = c(title = node_title)),
-                              'parameters[title]=Florida Bike Lanes')
+                              'parameters[title]=U.S. Adult Smoking Rate')
   })
 
 
@@ -23,7 +23,7 @@ node_pagesize = 10
     filters_to_text_query(filters = c(title = node_title,
                                       type = node_type,
                                       language = node_lang)),
-                          'parameters[title]=Florida Bike Lanes&parameters[type]=resource&parameters[language]=und')
+                          'parameters[title]=U.S. Adult Smoking Rate&parameters[type]=resource&parameters[language]=und')
   })
 
 
@@ -34,7 +34,7 @@ node_pagesize = 10
                          filters = c(title = node_title),
                          pagesize = NULL,
                          page = NULL),
-      'parameters[title]=Florida%20Bike%20Lanes')
+      'parameters[title]=U.S.%20Adult%20Smoking%20Rate')
   })
 
   test_that('Single fields are correctly built', {
@@ -61,7 +61,7 @@ node_pagesize = 10
                          filters = c(title = node_title),
                          pagesize = NULL,
                          page = NULL),
-      'fields=nid&parameters[title]=Florida%20Bike%20Lanes')
+      'fields=nid&parameters[title]=U.S.%20Adult%20Smoking%20Rate')
   })
 
   test_that('Multiple fields & multiple filters are correctly built', {
@@ -72,7 +72,7 @@ node_pagesize = 10
                                      language = node_lang),
                          pagesize = NULL,
                          page = NULL),
-      'fields=nid,uri,type&parameters[title]=Florida%20Bike%20Lanes&parameters[type]=resource&parameters[language]=und')
+      'fields=nid,uri,type&parameters[title]=U.S.%20Adult%20Smoking%20Rate&parameters[type]=resource&parameters[language]=und')
   })
 
   test_that('Page size is built correctly', {
@@ -101,5 +101,5 @@ node_pagesize = 10
                                      language = node_lang),
                          pagesize = node_pagesize,
                          page = node_page),
-      'fields=nid,uri,type&parameters[title]=Florida%20Bike%20Lanes&parameters[type]=resource&parameters[language]=und&pagesize=10&page=1')
+      'fields=nid,uri,type&parameters[title]=U.S.%20Adult%20Smoking%20Rate&parameters[type]=resource&parameters[language]=und&pagesize=10&page=1')
   })
