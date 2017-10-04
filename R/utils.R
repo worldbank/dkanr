@@ -85,6 +85,16 @@ err_handler <- function(x) {
   }
 }
 
+ds_err_handler <- function(x) {
+  err_handler(x)
+  if (!is.null(httr::content(x)$error)) {
+    errmsg <- httr::content(x)$error$message
+    stop(sprintf("%s",
+                 errmsg),
+         call. = FALSE)
+  }
+}
+
 
 notrail <- function(x) {
   gsub("/+$", "", x)
