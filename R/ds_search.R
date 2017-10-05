@@ -36,7 +36,7 @@ ds_search <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
                       sort_by = NULL,
                       q = NULL,
                       url = get_url(),
-                      credentials = list(cookie = get_cookie(), token = get_token())
+                      credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
                       as = 'df') {
   # authentication
   cookie = credentials$cookie
