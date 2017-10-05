@@ -57,6 +57,7 @@ as_dk <- function(x, class) {
   structure(x, class = class)
 }
 
+#' @export
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
