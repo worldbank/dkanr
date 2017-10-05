@@ -17,7 +17,7 @@
 #' fields = c('nid', 'type', 'uri'),
 #' filters = c(type='resource'))
 
-list_all_nodes <- function(url = get_url(), fields = NULL, filters = NULL, as = 'json', ...) {
+list_all_nodes <- function(url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), fields = NULL, filters = NULL, as = 'json', ...) {
   # Initialize looping parameters
   out <- vector(mode = "list", length = 1000)
   p <- 0
@@ -25,6 +25,7 @@ list_all_nodes <- function(url = get_url(), fields = NULL, filters = NULL, as = 
 
   repeat {
     resp <- list_nodes(url = url,
+                       credentials = credentials,
                        fields = fields,
                        filters = filters,
                        pagesize = 20,
