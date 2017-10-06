@@ -4,7 +4,8 @@
 \alias{update_node}
 \title{update_node}
 \usage{
-update_node(nid, url = get_url(), body, as = "json", ...)
+update_node(nid, url = get_url(), body, credentials = list(cookie =
+  dkanr::get_cookie(), token = dkanr::get_token()), as = "json", ...)
 }
 \arguments{
 \item{nid}{character: DKAN node ID}

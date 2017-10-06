@@ -4,7 +4,8 @@
 \alias{retrieve_node}
 \title{retrieve_node}
 \usage{
-retrieve_node(nid, url = get_url(), as = "json", ...)
+retrieve_node(nid, url = get_url(), credentials = list(cookie =
+  dkanr::get_cookie(), token = dkanr::get_token()), as = "json", ...)
 }
 \arguments{
 \item{nid}{character: DKAN node ID}
