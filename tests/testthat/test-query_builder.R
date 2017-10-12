@@ -13,7 +13,8 @@ node_pagesize = 10
 # Test filters_to_text_query
   test_that('Single filters are correctly built', {
     expect_equal(
-        filters_to_text_query(filters = c(title = node_title)),
+        filters_to_text_query(filters = c(title = node_title),
+                              text='parameters'),
                               'parameters[title]=U.S. Adult Smoking Rate')
   })
 
@@ -22,20 +23,23 @@ node_pagesize = 10
     expect_equal(
     filters_to_text_query(filters = c(title = node_title,
                                       type = node_type,
-                                      language = node_lang)),
+                                      language = node_lang),
+                          text='parameters'),
                           'parameters[title]=U.S. Adult Smoking Rate&parameters[type]=resource&parameters[language]=und')
   })
 
-  
+  # this string seems to be building fine, hasn't broken yet
   test_that('Numeric titles can pass', {
     expect_equal(
-      filters_to_text_query(filters = c(title = 12301230)),
+      filters_to_text_query(filters = c(title = 12301230),
+                            text='parameters'),
       'parameters[title]=12301230')
   })
 
   test_that('Parameters with empty strings', {
     expect_equal(
-      filters_to_text_query(filters = c(title = '')),
+      filters_to_text_query(filters = c(title = ''),
+                            text='parameters'),
       'parameters[title]=')
   })
 
@@ -117,7 +121,8 @@ node_pagesize = 10
       'fields=nid,uri,type&parameters[title]=U.S.%20Adult%20Smoking%20Rate&parameters[type]=resource&parameters[language]=und&pagesize=10&page=1')
   })
 
-  test_that('Integer parameters can pass strings and integers', {
+# test for different types
+  test_that('Integer parameters can pass strings as well', {
     expect_equal(
       build_search_query(fields = NULL,
                          filters = NULL,
@@ -130,14 +135,15 @@ node_pagesize = 10
   test_that('Parameter can build properly with special characters', {
     expect_equal(
       build_search_query(fields = node_fields,
-                         filters = c(title = "àèìòùÀÈÌÒÙ",
+                         filters = c(title = "??????????",
                                      type = node_type,
                                      language = node_lang),
                          pagesize = node_pagesize,
                          page = node_page),
-      'fields=nid,uri,type&parameters[title]=àèìòùÀÈÌÒÙ&parameters[type]=resource&parameters[language]=und&pagesize=10&page=1')
+      'fields=nid,uri,type&parameters[title]=??????????&parameters[type]=resource&parameters[language]=und&pagesize=10&page=1')
   })
 
+# empty string
   test_that('Empty string for parameters', {
     expect_equal(
       build_search_query(fields = '',
@@ -146,7 +152,7 @@ node_pagesize = 10
                          page = node_page),
       'fields=&pagesize=10&page=1')
   })
-  
+
 # tailing/leading white space
 #  test_that('Leading, tailing, double white space is removed', {
 #    expect_equal(
@@ -156,9 +162,9 @@ node_pagesize = 10
 #                         page = node_page),
 #     'fields=nid,uri,type&parameters[title]=Florida%20Bike%20Lanes&pagesize=10&page=1')
 # })
-  
+
 # NULLs as arg
-  test_that('NULL for parameters are built correctly', {
+  test_that('Empty string for parameters are built correctly', {
     expect_equal(
       build_search_query(fields = NULL,
                          filters = NULL,
@@ -167,7 +173,7 @@ node_pagesize = 10
       'pagesize=10&page=1')
   })
 
-  test_that('NULL for parameters are built correctly', {
+  test_that('Empty string for parameters', {
     expect_equal(
       build_search_query(fields = node_fields,
                          filters = NULL,
@@ -187,11 +193,12 @@ node_pagesize = 10
 #      'error$message')
 #  })
 
+  # need to include this functionality?
 #  test_that('Ampersands in strings are replaced correctly', {
 #    expect_equal(
 #      build_search_query(fields = node_fields,
 #                        filters = c(title = "World Bank Projects & Operations"),
 #                            pagesize = node_pagesize,
 #                            page = node_page),
-#      "fields=nid,uri,type&parameters[title]=World%20Bank%20Projects%20%26%20Operations&pagesize=10&page=1")
+#      "fields=nid,uri,type&parameters[title]=World%20Bank%20Projects%20&amp%20Operations&pagesize=10&page=1")
 #  })
