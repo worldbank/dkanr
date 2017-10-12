@@ -12,14 +12,8 @@ Some features of this package include:
 
 ## Installation
 
-You may install the package directly from CRAN.
+You may install the package directly from GitHub:
 ```r
-install.packages("dkanr")
-```
-
-Or download directly it from GitHub to access the latest developmental version.
-```r
-install.packages("dkanr")
 devtools::install_github("tfujs/dkanr")
 ```
 
