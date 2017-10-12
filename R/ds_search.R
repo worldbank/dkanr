@@ -41,11 +41,11 @@ ds_search <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
   # authentication
   cookie = credentials$cookie
   token = credentials$token
-  
+
   # DKAN settings
   path = 'api/action/datastore/search.json'
   DKAN_PAGE_LIMIT = 100
-  
+
   # get the total number of records if user has not specified num_records
   if(is.null(num_records)) {
     query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
@@ -60,15 +60,15 @@ ds_search <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
     ds_err_handler(res)
     num_records <- as.numeric(httr::content(res)$result$total)
   }
-  
+
   # get the data
   iterations <- ceiling(num_records / DKAN_PAGE_LIMIT)
   out <- vector(mode = 'list', length = num_records)
   num_records_covered = 0
-  
+
   # build the url
   query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
-  
+
   for (i in 1:iterations) {
     # reset the limit based on number of records left
     limit <- min(num_records-num_records_covered, DKAN_PAGE_LIMIT)
@@ -91,5 +91,5 @@ ds_search <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
   }
 
   # return the data in specified format
-  switch(as, json = as.character(jsonlite::toJSON(out)), df = do.call(rbind, out))
+  switch(as, json = as.character(jsonlite::toJSON(out)), df = dplyr::bind_rows(out))
 }
