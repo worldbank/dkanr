@@ -193,5 +193,5 @@ node_pagesize = 10
 #                        filters = c(title = "World Bank Projects & Operations"),
 #                            pagesize = node_pagesize,
 #                            page = node_page),
-#      "fields=nid,uri,type&parameters[title]=World%20Bank%20Projects%20&amp%20Operations&pagesize=10&page=1")
+#      "fields=nid,uri,type&parameters[title]=World%20Bank%20Projects%20%26%20Operations&pagesize=10&page=1")
 #  })
