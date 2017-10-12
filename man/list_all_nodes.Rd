@@ -4,8 +4,9 @@
 \alias{list_all_nodes}
 \title{list_all_nodes}
 \usage{
-list_all_nodes(url = get_url(), fields = NULL, filters = NULL,
-  as = "json", ...)
+list_all_nodes(url = get_url(), credentials = list(cookie =
+  dkanr::get_cookie(), token = dkanr::get_token()), fields = NULL,
+  filters = NULL, as = "json", ...)
 }
 \arguments{
 \item{url}{character: The DKAN site URL}
@@ -26,5 +27,7 @@ Returns list of nodes
 }
 \examples{
 list_all_nodes(url = "http://demo.getdkan.com")
-list_all_nodes(url = "http://demo.getdkan.com", fields = c('nid', 'type', 'uri'), filters = c(type='resource'))
+list_all_nodes(url = "http://demo.getdkan.com",
+fields = c('nid', 'type', 'uri'),
+filters = c(type='resource'))
 }

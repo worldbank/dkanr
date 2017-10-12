@@ -8,9 +8,9 @@ context("query_builder")
       filters_to_text_query(filters = c(title = "U.S. Adult Smoking Rate")),
       "parameters[title]=U.S. Adult Smoking Rate")
   })
-
+  
   test_that("Multiple filters are correctly built", {
-
+    
   })
 
 

@@ -1,20 +1,20 @@
-dkan_DELETE <- function(url, nid, body = NULL, ...){
-  dkan_REQUEST("DELETE", url, nid, body = body, ...)
+dkan_DELETE <- function(url, nid, body = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...){
+  dkan_REQUEST("DELETE", url, nid, body = body, credentials = credentials, ...)
 }
 
-dkan_PUT <- function(url, nid, body = NULL, ...){
-  dkan_REQUEST("PUT", url, nid, body = body, ...)
+dkan_PUT <- function(url, nid, body = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...){
+  dkan_REQUEST("PUT", url, nid, body = body, credentials = credentials, ...)
 }
 
-dkan_POST <- function(url, body = NULL, query = NULL, ...){
-  dkan_REQUEST("POST", url, nid = NULL, body = body, query = query, ...)
+dkan_POST <- function(url, body = NULL, query = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...){
+  dkan_REQUEST("POST", url, nid = NULL, body = body, query = query, credentials = credentials, ...)
 }
 
-dkan_GET <- function(url, nid = NULL, query = NULL, ...){
-  dkan_REQUEST("GET", url, nid = nid, body = NULL, query = query, ...)
+dkan_GET <- function(url, nid = NULL, query = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...){
+  dkan_REQUEST("GET", url, nid = nid, body = NULL, query = query, credentials = credentials, ...)
 }
 
-dkan_REQUEST <- function(verb, url, nid = NULL, body, ...) {
+dkan_REQUEST <- function(verb, url, nid = NULL, body, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...) {
   REQUEST <- getExportedValue("httr", verb)
   url <- notrail(url)
   url <- if (is.null(nid)) {
@@ -22,8 +22,8 @@ dkan_REQUEST <- function(verb, url, nid = NULL, body, ...) {
   } else {
     url <- file.path(url, dk(), nid)
   }
-  cookie <- Sys.getenv("DKANR_COOKIE")
-  token <- Sys.getenv("DKANR_TOKEN")
+  cookie <- credentials$cookie
+  token <- credentials$token
   if (token == "") {
     # no authentication
     if (is.null(body) || length(body) == 0) {
@@ -57,6 +57,7 @@ as_dk <- function(x, class) {
   structure(x, class = class)
 }
 
+#' @export
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
@@ -82,6 +83,16 @@ err_handler <- function(x) {
                    obj$errmsg),
            call. = FALSE)
     }
+  }
+}
+
+ds_err_handler <- function(x) {
+  err_handler(x)
+  if (!is.null(httr::content(x)$error)) {
+    errmsg <- httr::content(x)$error$message
+    stop(sprintf("%s",
+                 errmsg),
+         call. = FALSE)
   }
 }
 
@@ -123,6 +134,7 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
   body$username <- jsonlite::unbox(username)
   body$password <- jsonlite::unbox(password)
   body <- jsonlite::toJSON(body, pretty = TRUE)
+  
 
   out <- httr::POST(url,
                     httr::accept_json(),
@@ -154,17 +166,14 @@ request_token <- function(cookie, root_url) {
   return(out)
 }
 
-
-filters_to_text_query <- function(filters) {
+filters_to_text_query <- function(filters, text) {
   out <- purrr::map2_chr(filters, names(filters),
                          function(x, y) {
-                           paste0("parameters[", y, "]=", x)
-                           })
-  out <- paste(out, collapse = "&")
-
+                           paste0(text, '[', y, ']=', paste(x, collapse=','))})
+  out <- paste(out, collapse = '&')
+  
   return(out)
 }
-
 
 build_search_query <- function(fields,
                                filters,
@@ -179,7 +188,7 @@ build_search_query <- function(fields,
   }
   # filters
   if (!is.null(filters)) {
-    filters_text <- filters_to_text_query(filters)
+    filters_text <- filters_to_text_query(filters, 'parameters')
   } else {
     filters_text <- NULL
   }
@@ -202,5 +211,47 @@ build_search_query <- function(fields,
   out <- stringr::str_replace_all(out, pattern = "&+", replacement = "&")
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
 
+  return(out)
+}
+
+build_ds_search_query <- function(resource_id,
+                             fields,
+                             filters,
+                             sort_by,
+                             q) {
+  # resource_id
+  resource_id_text <- paste0('resource_id=', resource_id)
+  # fields
+  if (!is.null(fields)) {
+    fields_text <- paste(fields, collapse = ',')
+    fields_text <- paste0('fields=', fields_text)
+  } else {
+    fields_text <- NULL
+  }
+  # filters
+  if (!is.null(filters)) {
+    filters_text <- filters_to_text_query(filters, 'filters')
+  } else {
+    filters_text <- NULL
+  }
+  # sort
+  if (!is.null(sort_by)) {
+    sort_text <- filters_to_text_query(sort_by, 'sort')
+  } else {
+    sort_text <- NULL
+  }
+  # text query
+  if (!is.null(q)){
+    query_text <- paste0('query=', q)
+  }
+  else{
+    query_text <- NULL
+  }
+  
+  out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, sep = '&')
+  out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
+  out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
+  out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
+  
   return(out)
 }

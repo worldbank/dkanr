@@ -20,8 +20,8 @@
 #'                fields = c('nid', 'type', 'uri'),
 #'                filters = c(type='resource'))
 #'                }
-
 list_nodes <- function(url = get_url(),
+                       credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
                        fields = NULL,
                        filters = NULL,
                        pagesize = NULL,
@@ -40,7 +40,6 @@ list_nodes <- function(url = get_url(),
                                page = page)
   }
 
-
-  res <- dkan_GET(url = url, query = query, ...)
+  res <- dkan_GET(url = url, query = query, credentials = credentials, ...)
   switch(as, json = res, list = as_dk(jsl(res), "dkan_list"))
 }

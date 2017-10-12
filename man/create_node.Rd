@@ -4,12 +4,15 @@
 \alias{create_node}
 \title{create_node}
 \usage{
-create_node(url = get_url(), body, as = "json", ...)
+create_node(url = get_url(), body, credentials = list(cookie =
+  dkanr::get_cookie(), token = dkanr::get_token()), as = "json", ...)
 }
 \arguments{
 \item{url}{character: The DKAN site URL}
 
 \item{body}{json: A JSON object to be passed to the body of the request}
+
+\item{credentials}{list: API authentication credentials}
 
 \item{as}{character: Output format. Options are: 'json' or 'list'}
 

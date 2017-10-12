@@ -4,7 +4,8 @@
 \alias{delete_node}
 \title{delete_node}
 \usage{
-delete_node(nid, url = get_url(), as = "json", ...)
+delete_node(nid, url = get_url(), credentials = list(cookie =
+  dkanr::get_cookie(), token = dkanr::get_token()), as = "json", ...)
 }
 \arguments{
 \item{nid}{character: DKAN node ID}
