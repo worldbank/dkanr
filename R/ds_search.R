@@ -17,18 +17,20 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ds_search(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
-#           fields = c('Country','City','Region','Population'),
-#           filters = list('Country'=c('co','my'), 'Region'=c('04','09','22')),
-#           num_records = 20,
-#           offset = 0,
-#           limit = 100,
-#           sort_by = c('Country'='asc'),
-#           q = "puertica",
-#           url = get_url(),
-#           as = 'df')
+#'           fields = c('Country','City','Region','Population'),
+#'           filters = list('Country'=c('co','my'), 'Region'=c('04','09','22')),
+#'           num_records = 20,
+#'           offset = 0,
+#'           limit = 100,
+#'           sort_by = c('Country'='asc'),
+#'           q = "puertica",
+#'           url = get_url(),
+#'           as = 'df')
+#'}
 
-ds_search <- function(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
+ds_search <- function(resource_id,
                       fields = NULL,
                       filters = NULL,
                       num_records = NULL,

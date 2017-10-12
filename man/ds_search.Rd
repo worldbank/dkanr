@@ -4,10 +4,10 @@
 \alias{ds_search}
 \title{ds_search}
 \usage{
-ds_search(resource_id = "10c578a6-63c4-40bd-a55d-0c27bf276283",
-  fields = NULL, filters = NULL, num_records = NULL, offset = 0,
-  sort_by = NULL, q = NULL, url = get_url(), credentials = list(cookie =
-  dkanr::get_cookie(), token = dkanr::get_token()), as = "df")
+ds_search(resource_id, fields = NULL, filters = NULL, num_records = NULL,
+  offset = 0, sort_by = NULL, q = NULL, url = get_url(),
+  credentials = list(cookie = dkanr::get_cookie(), token =
+  dkanr::get_token()), as = "df")
 }
 \arguments{
 \item{resource_id}{character: DKAN resource ID}
@@ -37,5 +37,16 @@ data.frame or character
 Search csv resource file stored in the datastore.
 }
 \examples{
+\dontrun{
 ds_search(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
+          fields = c('Country','City','Region','Population'),
+          filters = list('Country'=c('co','my'), 'Region'=c('04','09','22')),
+          num_records = 20,
+          offset = 0,
+          limit = 100,
+          sort_by = c('Country'='asc'),
+          q = "puertica",
+          url = get_url(),
+          as = 'df')
+}
 }
