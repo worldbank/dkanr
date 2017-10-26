@@ -11,12 +11,16 @@
 #' @export
 #'
 
-attach_file_to_node <- function(nid, url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), file_path, attach = 1) {
+attach_file_to_node <- function(nid,
+                                url = get_url(),
+                                credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
+                                file_path,
+                                attach = 1) {
 
   # construct the body of the POST request
   body <- list("files[1]" = httr::upload_file(file_path),
-              "field_name" = c("field_upload"),
-              "attach" = attach)
+               "field_name" = c("field_upload"),
+               "attach" = attach)
 
   # build query
   path <- paste0("api/dataset/node/", nid, "/attach_file")

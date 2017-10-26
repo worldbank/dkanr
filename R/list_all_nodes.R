@@ -44,7 +44,7 @@ list_all_nodes <- function(url = get_url(), credentials = list(cookie = dkanr::g
         out <- c(out, vector(mode = "list", length = 1000))
       }
       # Print number of pages retrieved
-      if (p%%10 == 0) {
+      if (p %% 10 == 0) {
         m <- paste0(p * 20, ' records (DKAN nodes) have been retrieved')
         message(m)
       }

@@ -41,15 +41,15 @@ ds_search <- function(resource_id,
                       credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
                       as = 'df') {
   # authentication
-  cookie = credentials$cookie
-  token = credentials$token
+  cookie <- credentials$cookie
+  token <- credentials$token
 
   # DKAN settings
-  path = 'api/action/datastore/search.json'
-  DKAN_PAGE_LIMIT = 100
+  path <- 'api/action/datastore/search.json'
+  DKAN_PAGE_LIMIT <- 100
 
   # get the total number of records if user has not specified num_records
-  if(is.null(num_records)) {
+  if (is.null(num_records)) {
     query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
     query <- paste0(query, '&offset=', offset)
     url <- httr::modify_url(url, path = path, query = query)
@@ -66,14 +66,14 @@ ds_search <- function(resource_id,
   # get the data
   iterations <- ceiling(num_records / DKAN_PAGE_LIMIT)
   out <- vector(mode = 'list', length = num_records)
-  num_records_covered = 0
+  num_records_covered <- 0
 
   # build the url
   query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
 
   for (i in 1:iterations) {
     # reset the limit based on number of records left
-    limit <- min(num_records-num_records_covered, DKAN_PAGE_LIMIT)
+    limit <- min(num_records - num_records_covered, DKAN_PAGE_LIMIT)
     query <- paste0(query, '&offset=', offset)
     query <- paste0(query, '&limit=', limit)
     url <- httr::modify_url(url, path = path, query = query)
@@ -85,7 +85,7 @@ ds_search <- function(resource_id,
                                                     'X-CSRF-Token' = token)),
                      encode = 'json')
     err_handler(res)
-    records = httr::content(res)$result$records
+    records <- httr::content(res)$result$records
     index <- (1 + offset):(offset + length(records))
     out[index] <- purrr::map(records, function(x) x)
     offset <- offset + limit
