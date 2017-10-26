@@ -57,7 +57,6 @@ as_dk <- function(x, class) {
   structure(x, class = class)
 }
 
-#' @export
 err_handler <- function(x) {
   if (x$status_code > 201) {
     obj <- try({
@@ -134,7 +133,7 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
   body$username <- jsonlite::unbox(username)
   body$password <- jsonlite::unbox(password)
   body <- jsonlite::toJSON(body, pretty = TRUE)
-  
+
 
   out <- httr::POST(url,
                     httr::accept_json(),
@@ -171,7 +170,7 @@ filters_to_text_query <- function(filters, text) {
                          function(x, y) {
                            paste0(text, '[', y, ']=', paste(x, collapse=','))})
   out <- paste(out, collapse = '&')
-  
+
   return(out)
 }
 
@@ -247,11 +246,11 @@ build_ds_search_query <- function(resource_id,
   else{
     query_text <- NULL
   }
-  
+
   out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, sep = '&')
   out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
-  
+
   return(out)
 }
