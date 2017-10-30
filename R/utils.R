@@ -134,7 +134,7 @@ login_service <- function(system_connect_sessid, username, password, root_url) {
   body$username <- jsonlite::unbox(username)
   body$password <- jsonlite::unbox(password)
   body <- jsonlite::toJSON(body, pretty = TRUE)
-  
+
 
   out <- httr::POST(url,
                     httr::accept_json(),
@@ -166,12 +166,13 @@ request_token <- function(cookie, root_url) {
   return(out)
 }
 
+#' @export
 filters_to_text_query <- function(filters, text) {
   out <- purrr::map2_chr(filters, names(filters),
                          function(x, y) {
                            paste0(text, '[', y, ']=', paste(x, collapse=','))})
   out <- paste(out, collapse = '&')
-  
+
   return(out)
 }
 
@@ -247,11 +248,11 @@ build_ds_search_query <- function(resource_id,
   else{
     query_text <- NULL
   }
-  
+
   out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, sep = '&')
   out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
-  
+
   return(out)
 }
