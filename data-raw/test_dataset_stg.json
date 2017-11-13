@@ -19,7 +19,7 @@
 	"field_wbddh_terms_of_use": {
 		"und": "440"
 	},
-	
+
 	"field_topic": {
 		"und": [
 			"366"
@@ -32,6 +32,11 @@
 		"und": [
 			"169"
 		]
+	},
+	"field_license_wbddh":{
+	  "und": [
+	    "1341"
+	  ]
 	},
 	"field_wbddh_economy_coverage": {
 		"und": [

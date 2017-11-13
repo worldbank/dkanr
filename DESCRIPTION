@@ -11,7 +11,8 @@ Imports: httr,
     jsonlite,
     assertthat,
     purrr,
-    stringr
+    stringr,
+    dplyr
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,

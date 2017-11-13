@@ -1,20 +1,20 @@
 context('query_builder')
 
 # Define constant values
-demo_url = 'http://demo.getdkan.com/'
-node_title = 'U.S. Adult Smoking Rate'
-node_type = 'resource'
-node_lang = 'und'
-node_field = c('nid')
-node_fields = c('nid', 'uri', 'type')
-node_page = 1
-node_pagesize = 10
+demo_url <- 'http://demo.getdkan.com/'
+node_title <- 'U.S. Adult Smoking Rate'
+node_type <- 'resource'
+node_lang <- 'und'
+node_field <- c('nid')
+node_fields <- c('nid', 'uri', 'type')
+node_page <- 1
+node_pagesize <- 10
 
 # Test filters_to_text_query
   test_that('Single filters are correctly built', {
     expect_equal(
         filters_to_text_query(filters = c(title = node_title),
-                              text='parameters'),
+                              text = 'parameters'),
                               'parameters[title]=U.S. Adult Smoking Rate')
   })
 
@@ -24,7 +24,7 @@ node_pagesize = 10
     filters_to_text_query(filters = c(title = node_title,
                                       type = node_type,
                                       language = node_lang),
-                          text='parameters'),
+                          text = 'parameters'),
                           'parameters[title]=U.S. Adult Smoking Rate&parameters[type]=resource&parameters[language]=und')
   })
 
@@ -32,14 +32,14 @@ node_pagesize = 10
   test_that('Numeric titles can pass', {
     expect_equal(
       filters_to_text_query(filters = c(title = 12301230),
-                            text='parameters'),
+                            text = 'parameters'),
       'parameters[title]=12301230')
   })
 
   test_that('Parameters with empty strings', {
     expect_equal(
       filters_to_text_query(filters = c(title = ''),
-                            text='parameters'),
+                            text = 'parameters'),
       'parameters[title]=')
   })
 
