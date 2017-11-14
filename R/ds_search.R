@@ -46,8 +46,7 @@ ds_search <- function(resource_id,
   path <- 'api/action/datastore/search.json'
 
   # build the url
-  query <- build_ds_search_query(resource_id, fields, filters, sort, q, limit)
-  query <- paste0(query, '&offset=', offset)
+  query <- build_ds_search_query(resource_id, fields, filters, sort, q, offset, limit)
   url <- httr::modify_url(url, path = path, query = query)
   # execute the query
   res <- httr::GET(url = url,

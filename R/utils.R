@@ -220,6 +220,7 @@ build_ds_search_query <- function(resource_id,
                              filters,
                              sort,
                              q,
+                             offset,
                              limit) {
   # resource_id
   resource_id_text <- paste0('resource_id=', resource_id)
@@ -249,10 +250,12 @@ build_ds_search_query <- function(resource_id,
   else{
     query_text <- NULL
   }
+  # offset
+  offset_text <- paste0("offset=", offset)
   # limit
   limit_text <- paste0("limit=", limit)
 
-  out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, limit_text, sep = '&')
+  out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, offset_text, limit_text, sep = '&')
   out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
