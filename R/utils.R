@@ -218,8 +218,9 @@ build_search_query <- function(fields,
 build_ds_search_query <- function(resource_id,
                              fields,
                              filters,
-                             sort_by,
-                             q) {
+                             sort,
+                             q,
+                             limit) {
   # resource_id
   resource_id_text <- paste0('resource_id=', resource_id)
   # fields
@@ -236,8 +237,8 @@ build_ds_search_query <- function(resource_id,
     filters_text <- NULL
   }
   # sort
-  if (!is.null(sort_by)) {
-    sort_text <- filters_to_text_query(sort_by, 'sort')
+  if (!is.null(sort)) {
+    sort_text <- filters_to_text_query(sort, 'sort')
   } else {
     sort_text <- NULL
   }
@@ -248,8 +249,10 @@ build_ds_search_query <- function(resource_id,
   else{
     query_text <- NULL
   }
+  # limit
+  limit_text <- paste0("limit=", limit)
 
-  out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, sep = '&')
+  out <- paste(resource_id_text, fields_text, filters_text, sort_text, query_text, limit_text, sep = '&')
   out <- stringr::str_replace_all(out, pattern = " ", replacement = "_")
   out <- stringr::str_replace_all(out, pattern = '&+', replacement = '&')
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
