@@ -15,8 +15,8 @@
 #' @examples
 #' list_all_nodes(url = "http://demo.getdkan.com")
 #' list_all_nodes(url = "http://demo.getdkan.com",
-#' fields = c('nid', 'type', 'uri'),
-#' filters = c(type='resource'))
+#' fields = c('nid', 'type'),
+#' filters = c(type = 'resource'))
 
 list_all_nodes <- function(url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), fields = NULL, filters = NULL, as = 'json', ...) {
   # Initialize looping parameters
