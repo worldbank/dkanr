@@ -168,7 +168,8 @@ request_token <- function(cookie, root_url) {
 filters_to_text_query <- function(filters, text) {
   out <- purrr::map2_chr(filters, names(filters),
                          function(x, y) {
-                           paste0(text, '[', y, ']=', paste(x, collapse=','))})
+                           paste0(text, '[', y, ']=', paste(x, collapse = ','))
+                           })
   out <- paste(out, collapse = '&')
 
   return(out)
@@ -243,7 +244,7 @@ build_ds_search_query <- function(resource_id,
   if (!is.null(q)){
     query_text <- paste0('query=', q)
   }
-  else{
+  else {
     query_text <- NULL
   }
 
@@ -253,4 +254,4 @@ build_ds_search_query <- function(resource_id,
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
 
   return(out)
-}
+  }

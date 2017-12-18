@@ -13,7 +13,8 @@
 
 attach_file_to_node <- function(nid,
                                 url = get_url(),
-                                credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
+                                credentials = list(cookie = dkanr::get_cookie(),
+                                                   token = dkanr::get_token()),
                                 file_path,
                                 attach = 1) {
 
