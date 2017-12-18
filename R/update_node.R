@@ -1,6 +1,6 @@
 #' update_node
 #'
-#' Update an exisiting DAKN node
+#' Update an existing DKAN node
 #'
 #' @param nid character: DKAN node ID
 #' @param url character: The DKAN site URL

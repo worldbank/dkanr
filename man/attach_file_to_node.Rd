@@ -16,7 +16,7 @@ attach_file_to_node(nid, url = get_url(), credentials = list(cookie =
 
 \item{file_path}{character: path to file on local machine}
 
-\item{attach}{numeric: Setting the attach parameter to 0 ensures that the file will replace any existing file on the resource. Setting it to 1 will result in a rejected request if the resource already has an attached file (but it will work if the resource’s file upload field is empty).}
+\item{attach}{numeric: Setting the attach parameter to 0 ensures that the file will replace any existing file on the resource. Setting it to 1 will result in a rejected request if the resource already has an attached file (but it will work if the resource file upload field is empty).}
 }
 \description{
 Attach a file to an existing resource node

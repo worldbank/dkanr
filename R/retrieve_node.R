@@ -1,6 +1,6 @@
 #' retrieve_node
 #'
-#' Returns metadata associated with an exisiting DKAN Node ID.
+#' Returns metadata associated with an existing DKAN Node ID.
 #'
 #' @param nid character: DKAN node ID
 #' @param url character: The DKAN site URL

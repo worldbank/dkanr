@@ -24,7 +24,7 @@ update_node(nid, url = get_url(), body, credentials = list(cookie =
 dkan_node object
 }
 \description{
-Update an exisiting DAKN node
+Update an existing DKAN node
 }
 \examples{
 \dontrun{

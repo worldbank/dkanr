@@ -22,7 +22,7 @@ delete_node(nid, url = get_url(), credentials = list(cookie =
 character or dkan_node object
 }
 \description{
-Delete an exisiting DAKN node
+Delete an existing DKAN node
 }
 \examples{
 \dontrun{

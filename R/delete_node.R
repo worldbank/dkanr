@@ -1,6 +1,6 @@
 #' delete_node
 #'
-#' Delete an exisiting DAKN node
+#' Delete an existing DKAN node
 #'
 #' @param nid character: DKAN node ID
 #' @param url character: The DKAN site URL

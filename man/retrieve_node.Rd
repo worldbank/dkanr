@@ -22,7 +22,7 @@ retrieve_node(nid, url = get_url(), credentials = list(cookie =
 dkan_node object
 }
 \description{
-Returns metadata associated with an exisiting DKAN Node ID.
+Returns metadata associated with an existing DKAN Node ID.
 }
 \examples{
 retrieve_node(nid = 1, url = "http://demo.getdkan.com")
