@@ -216,10 +216,10 @@ build_search_query <- function(fields,
 }
 
 build_ds_search_query <- function(resource_id,
-                             fields,
-                             filters,
-                             sort_by,
-                             q) {
+                             fields = NULL,
+                             filters = NULL,
+                             sort_by = NULL,
+                             q = NULL) {
   # resource_id
   resource_id_text <- paste0('resource_id=', resource_id)
   # fields
