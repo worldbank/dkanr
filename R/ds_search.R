@@ -14,7 +14,6 @@
 #' @param as character: output format - json or df
 #'
 #' @return data.frame or character
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -33,65 +32,29 @@
 ds_search <- function(resource_id,
                       fields = NULL,
                       filters = NULL,
-                      num_records = NULL,
+                      limit = 100,
                       offset = 0,
-                      sort_by = NULL,
+                      sort = NULL,
                       q = NULL,
                       url = get_url(),
-                      credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
-                      as = 'df') {
+                      credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token())) {
   # authentication
   cookie <- credentials$cookie
   token <- credentials$token
 
   # DKAN settings
   path <- 'api/action/datastore/search.json'
-  DKAN_PAGE_LIMIT <- 100
-
-  # get the total number of records if user has not specified num_records
-  if (is.null(num_records)) {
-    query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
-    query <- paste0(query, '&offset=', offset)
-    url <- httr::modify_url(url, path = path, query = query)
-    res <- httr::GET(url = url,
-                     httr::add_headers(.headers = c('Content-Type' = 'application/json',
-                                                    'charset' = 'utf-8',
-                                                    'Cookie' =  cookie,
-                                                    'X-CSRF-Token' = token)),
-                     encode = 'json')
-    ds_err_handler(res)
-    num_records <- as.numeric(httr::content(res)$result$total)
-  }
-
-  # get the data
-  iterations <- ceiling(num_records / DKAN_PAGE_LIMIT)
-  out <- vector(mode = 'list', length = num_records)
-  num_records_covered <- 0
 
   # build the url
-  query <- build_ds_search_query(resource_id, fields, filters, sort_by, q)
-
-  for (i in 1:iterations) {
-    # reset the limit based on number of records left
-    limit <- min(num_records - num_records_covered, DKAN_PAGE_LIMIT)
-    query <- paste0(query, '&offset=', offset)
-    query <- paste0(query, '&limit=', limit)
-    url <- httr::modify_url(url, path = path, query = query)
-    # execute the query
-    res <- httr::GET(url = url,
-                     httr::add_headers(.headers = c('Content-Type' = 'application/json',
-                                                    'charset' = 'utf-8',
-                                                    'Cookie' =  cookie,
-                                                    'X-CSRF-Token' = token)),
-                     encode = 'json')
-    err_handler(res)
-    records <- httr::content(res)$result$records
-    index <- (1 + offset):(offset + length(records))
-    out[index] <- purrr::map(records, function(x) x)
-    offset <- offset + limit
-    num_records_covered <- num_records_covered + limit
-  }
-
-  # return the data in specified format
-  switch(as, json = as.character(jsonlite::toJSON(out)), df = dplyr::bind_rows(out))
+  query <- build_ds_search_query(resource_id, fields, filters, sort, q, offset, limit)
+  url <- httr::modify_url(url, path = path, query = query)
+  # execute the query
+  res <- httr::GET(url = url,
+                   httr::add_headers(.headers = c('Content-Type' = 'application/json',
+                                                  'charset' = 'utf-8',
+                                                  'Cookie' =  cookie,
+                                                  'X-CSRF-Token' = token)),
+                   encode = 'json')
+  err_handler(res)
+  httr::content(res)$result$records
 }
