@@ -3,8 +3,5 @@
 language: R
 sudo: false
 cache: packages
-install:
-  ## For installing all CRAN dependencies using package's DESCRIPTION file
-  - ./travis-tool.sh install_deps
 after_success:
     - Rscript -e 'covr::codecov()'
