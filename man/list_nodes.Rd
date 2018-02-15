@@ -21,12 +21,12 @@ list_nodes(url = get_url(), credentials = list(cookie = dkanr::get_cookie(),
 
 \item{page}{numeric: The zero-based index of the page to get, defaults to 0.}
 
-\item{as}{character: Output format. Options are: 'json' or 'list'}
+\item{as}{character: Output format. Options are: 'json', 'list', or 'df' (data frame)}
 
 \item{...}{Other optional parameters to be passed to the underlying GET request}
 }
 \value{
-dkan_node object
+json, dkan_node (list), or data frame
 }
 \description{
 Returns list of nodes

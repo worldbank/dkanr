@@ -8,10 +8,10 @@
 #' @param filters named character vector: filters to be applied to the search
 #' @param pagesize numeric: Number of records to get per page (max = 20).
 #' @param page numeric: The zero-based index of the page to get, defaults to 0.
-#' @param as character: Output format. Options are: 'json' or 'list'
+#' @param as character: Output format. Options are: 'json', 'list', or 'df' (data frame)
 #' @param ... Other optional parameters to be passed to the underlying GET request
 #'
-#' @return dkan_node object
+#' @return json, dkan_node (list), or data frame
 #' @export
 #'
 #' @examples
@@ -42,5 +42,5 @@ list_nodes <- function(url = get_url(),
   }
 
   res <- dkan_GET(url = url, query = query, credentials = credentials, ...)
-  switch(as, json = res, list = as_dk(jsl(res), "dkan_list"))
+  switch(as, json = res, list = as_dk(jsl(res), "dkan_list"), df = jsldf(out))
 }

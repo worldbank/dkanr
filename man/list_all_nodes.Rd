@@ -6,7 +6,7 @@
 \usage{
 list_all_nodes(url = get_url(), credentials = list(cookie =
   dkanr::get_cookie(), token = dkanr::get_token()), fields = NULL,
-  filters = NULL, as = "json", ...)
+  filters = NULL, as = "df", ...)
 }
 \arguments{
 \item{url}{character: The DKAN site URL}
@@ -17,12 +17,12 @@ list_all_nodes(url = get_url(), credentials = list(cookie =
 
 \item{filters}{named character vector: filters to be applied to the search}
 
-\item{as}{character: Output format. Options are: 'json' or 'list'}
+\item{as}{character: Output format. Options are: 'json', 'list' or 'df' (data frame)}
 
 \item{...}{Other optional parameters to be passed to the underlying GET request}
 }
 \value{
-dkan_node object
+json, dkan_node (list), or data frame
 }
 \description{
 Returns list of nodes
