@@ -49,7 +49,7 @@ dkan_REQUEST <- function(verb, url, nid = NULL, body, credentials = list(cookie 
 cc <- function(l) Filter(Negate(is.null), l)
 dk <- function() "api/dataset/node"
 jsl <- function(x) jsonlite::fromJSON(x, simplifyVector = FALSE)
-jsldf <- function(x) jsonlite::fromJSON(x, simplifyDataFrame = TRUE)
+jsldf <- function(x) tibble::as_data_frame(jsonlite::fromJSON(x, simplifyDataFrame = TRUE))
 ctj <- function() httr::content_type_json()
 aj <- function() httr::accept_json()
 

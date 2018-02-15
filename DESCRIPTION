@@ -12,9 +12,10 @@ Imports: httr,
     assertthat,
     purrr,
     stringr,
-    dplyr
+    dplyr,
+    tibble
 RoxygenNote: 6.0.1
-Suggests: 
+Suggests:
     knitr,
     rmarkdown,
     testthat,
