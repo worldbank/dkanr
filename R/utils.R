@@ -57,6 +57,11 @@ as_dk <- function(x, class) {
   structure(x, class = class)
 }
 
+#' err_handler
+#'
+#' Helper function to capture error messages returned by the API
+#'
+#' @param x response: The API response
 #' @export
 err_handler <- function(x) {
   if (x$status_code > 201) {
@@ -166,6 +171,12 @@ request_token <- function(cookie, root_url) {
   return(out)
 }
 
+#' filters_to_text_query
+#'
+#' Helper function to build API query string
+#'
+#' @param filters named vector: filters to be applied
+#' @param text vector: The key word used for filtering
 #' @export
 filters_to_text_query <- function(filters, text) {
   out <- purrr::map2_chr(filters, names(filters),
