@@ -6,10 +6,10 @@ Authors@R: c(
         role = c("aut", "cre"),
         email = "tonyfujs@gmail.com"),
     person("Meera", "Desai",
-        role = "ctb",
+        role = "aut",
         email = "mbdesai@umich.edu"),
     person("Karthik", "Ramanathan",
-        role = "ctb",
+        role = "aut",
         email = "drkarthi@umich.edu")
     )
 Description: Client for the DKAN API (https://dkan.readthedocs.io/en/latest/apis/index.html).
