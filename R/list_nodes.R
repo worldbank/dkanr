@@ -42,5 +42,5 @@ list_nodes <- function(url = get_url(),
   }
 
   res <- dkan_GET(url = url, query = query, credentials = credentials, ...)
-  switch(as, json = res, list = as_dk(jsl(res), "dkan_list"), df = jsldf(out))
+  switch(as, json = res, list = as_dk(jsl(res), "dkan_list"), df = jsldf(res))
 }
