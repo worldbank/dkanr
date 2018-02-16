@@ -1,0 +1,153 @@
+---
+title: "Getting started with dkanr - retrieving information"
+date: "`r Sys.Date()`"
+output: 
+ rmarkdown::html_vignette:
+    toc: true
+ md_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to dkanr}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+## Introduction to dkanr
+
+The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
+
+This short introduction vignette shows you how to:
+
+* Locate a dataset (the "Crowdsourced Price Data Collection Pilot"" dataset)
+* Access its metadata
+* Access download the .csv file of the data
+
+__Accessing data via a DKAN user interface__
+
+![Accessing data via a DKAN website](../inst/img/dkan_demo.gif)
+
+## Setting Up Your Connection
+
+### Connection without authentication
+
+To set-up a connection without authentication, you just need the site URL. 
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(purrr)
+library(dkanr)
+library(dplyr)
+dkanr_setup(url = 'https://datacatalog.worldbank.org/')
+```
+
+### Authenticated connection
+If authentication is required, you will also need to specify your username and password.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+dkanr_setup(url = 'http://demo.getdkan.com',
+            username = 'my_username',
+            password = 'my_password')
+```
+
+You can verify that you are successfully connected by printing your connection information.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+dkanr_settings()
+```
+
+## STEP 1: List all available datasets with `list_all_nodes()`
+
+While exploring the offerings of the catalog, you can retrieve all the available datasets with a simple query.
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+resp <- list_all_nodes(filters = c(type = 'dataset'), as = 'df')
+resp %>%
+  select(nid, title, uri, type) %>%
+  head(n = 10)
+```
+
+## STEP 2: Access metadata for a specific dataset node
+
+Say we are interested in the following dataset: "Crowdsourced Price Data Collection Pilot". The metadata for this node can be retrieved as follows: 
+1. Identify the dataset node ID
+2. Use the node ID to retrieve the dataset metadata
+
+### Identify the dataset node ID  
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+resp %>%
+  filter(title == 'Crowdsourced Price Data Collection Pilot') %>%
+  select(nid, title, uri, type)
+```
+
+### Use the node ID to retrieve the dataset metadata  
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+metadata <- retrieve_node(nid ='140177', as = 'list')
+metadata
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# All metadata fields
+names(metadata)[1:30]
+```
+
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Access specific metadata fields
+metadata$title
+```
+
+## STEP 3: Access data for a specific resource node
+Retrieving data file attached your dataset follows a similar logic:
+1. Identify the resource node IDs
+2. Use the resource node IDs to access metadata and URLs
+
+### Retrieve the resource Node IDs
+
+17 resources are attached to this dataset
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+get_resource_nids(metadata)
+```
+
+### Use the resource node ID to retrieve the resource metadata  
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+metadata_rs <- retrieve_node(nid ='140366', as = 'list')
+metadata_rs
+```
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# All metadata fields
+names(metadata_rs)[1:30]
+```
+
+### Retrieve the resource URL from the resource metadata
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+get_resource_url(metadata_rs)
+```
+
+
+## Querying data
+Some data files may be directly queried through the API. Only data file that have been imported into the DKAN datastore can be queried through the API. 
+
+### Check if a data file is available on the DKAN datastore
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+ds_is_available(metadata_rs)
+```
+
+### Retrieve data from the datastore via the API
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+ds_search_all(resource_id = metadata_rs$uuid, as = 'df') %>%
+  select(item_name, item_code, price)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+temp <- ds_search(resource_id = metadata_rs$uuid)
+dplyr::bind_rows(temp) %>%
+  select(item_name, item_code, price)
+```
