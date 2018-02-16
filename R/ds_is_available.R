@@ -11,12 +11,16 @@
 ds_is_available <- function(metadata) {
 
   # CHECK input
-  assertthat::assert_that(is.list(metadata) == TRUE,
-                          msg = 'metadata must be a list')
-  assertthat::assert_that(metadata$type == "resource",
-                          msg = 'This node is not of type "resource". Resource links are only available in resource nodes')
+  assertthat::assert_that(
+    is.list(metadata) == TRUE,
+    msg = "metadata must be a list"
+  )
+  assertthat::assert_that(
+    metadata$type == "resource",
+    msg = 'This node is not of type "resource". Resource links are only available in resource nodes'
+  )
 
-  out <- if (metadata[['field_datastore_status']][['und']][[1]][['value']] == "1") {
+  out <- if (metadata[["field_datastore_status"]][["und"]][[1]][["value"]] == "1") {
     return(TRUE)
   } else {
     return(FALSE)

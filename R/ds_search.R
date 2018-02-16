@@ -26,7 +26,7 @@
 #'           q = "puertica",
 #'           url = get_url(),
 #'           as = 'df')
-#'}
+#' }
 
 ds_search <- function(resource_id,
                       fields = NULL,
@@ -42,18 +42,22 @@ ds_search <- function(resource_id,
   token <- credentials$token
 
   # DKAN settings
-  path <- 'api/action/datastore/search.json'
+  path <- "api/action/datastore/search.json"
 
   # build the url
   query <- build_ds_search_query(resource_id, fields, filters, sort, q, offset, limit)
   url <- httr::modify_url(url, path = path, query = query)
   # execute the query
-  res <- httr::GET(url = url,
-                   httr::add_headers(.headers = c('Content-Type' = 'application/json',
-                                                  'charset' = 'utf-8',
-                                                  'Cookie' =  cookie,
-                                                  'X-CSRF-Token' = token)),
-                   encode = 'json')
+  res <- httr::GET(
+    url = url,
+    httr::add_headers(.headers = c(
+      "Content-Type" = "application/json",
+      "charset" = "utf-8",
+      "Cookie" = cookie,
+      "X-CSRF-Token" = token
+    )),
+    encode = "json"
+  )
   err_handler(res)
   httr::content(res)$result$records
 }

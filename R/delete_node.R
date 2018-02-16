@@ -18,8 +18,10 @@
 
 delete_node <- function(nid, url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), as = "json", ...) {
   # CHECK: input validity
-  assertthat::assert_that(!is.null(nid),
-                          msg = "The Node ID (nid) argument must be specified")
+  assertthat::assert_that(
+    !is.null(nid),
+    msg = "The Node ID (nid) argument must be specified"
+  )
   res <- dkan_DELETE(url = url, nid = nid, credentials = credentials, ...)
   switch(as, json = res, list = as_dk(jsl(res), "dkan_node"))
 }

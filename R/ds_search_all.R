@@ -28,51 +28,56 @@
 #'           q = "puertica",
 #'           url = get_url(),
 #'           as = 'df')
-#'}
+#' }
 
 ds_search_all <- function(resource_id,
-                      fields = NULL,
-                      filters = NULL,
-                      num_records = NULL,
-                      offset = 0,
-                      sort = NULL,
-                      q = NULL,
-                      url = get_url(),
-                      credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
-                      as = 'df') {
+                          fields = NULL,
+                          filters = NULL,
+                          num_records = NULL,
+                          offset = 0,
+                          sort = NULL,
+                          q = NULL,
+                          url = get_url(),
+                          credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
+                          as = "df") {
   # authentication
   cookie <- credentials$cookie
   token <- credentials$token
 
   # DKAN settings
-  path <- 'api/action/datastore/search.json'
+  path <- "api/action/datastore/search.json"
   DKAN_PAGE_LIMIT <- 100
 
   # get the total number of records if user has not specified num_records
   if (is.null(num_records)) {
-
     query <- build_ds_search_query(resource_id, fields, filters, sort, q, offset, limit = DKAN_PAGE_LIMIT)
     url <- httr::modify_url(url, path = path, query = query)
-    res <- httr::GET(url = url,
-                     httr::add_headers(.headers = c('Content-Type' = 'application/json',
-                                                    'charset' = 'utf-8',
-                                                    'Cookie' =  cookie,
-                                                    'X-CSRF-Token' = token)),
-                     encode = 'json')
+    res <- httr::GET(
+      url = url,
+      httr::add_headers(.headers = c(
+        "Content-Type" = "application/json",
+        "charset" = "utf-8",
+        "Cookie" = cookie,
+        "X-CSRF-Token" = token
+      )),
+      encode = "json"
+    )
     ds_err_handler(res)
     num_records <- as.numeric(httr::content(res)$result$total)
   }
 
   # number of iterations required
   iterations <- ceiling(num_records / DKAN_PAGE_LIMIT)
-  out <- vector(mode = 'list', length = num_records)
+  out <- vector(mode = "list", length = num_records)
   num_records_remaining <- num_records
 
   for (i in 1:iterations) {
-    limit = min(num_records_remaining, DKAN_PAGE_LIMIT)
-    records <- ds_search(resource_id = resource_id, fields = fields, filters = filters,
-                limit = limit, offset = offset, sort = sort, q = q,
-                url = get_url(), credentials = list(token = get_token(), cookie = get_cookie()))
+    limit <- min(num_records_remaining, DKAN_PAGE_LIMIT)
+    records <- ds_search(
+      resource_id = resource_id, fields = fields, filters = filters,
+      limit = limit, offset = offset, sort = sort, q = q,
+      url = get_url(), credentials = list(token = get_token(), cookie = get_cookie())
+    )
     index <- (1 + offset):(offset + length(records))
     out[index] <- purrr::map(records, function(x) x)
     offset <- offset + limit

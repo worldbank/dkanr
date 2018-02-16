@@ -30,15 +30,18 @@ list_nodes <- function(url = get_url(),
                        as = "json", ...) {
   # Build query
   query <- NULL
-  if (any(!is.null(fields),
-          !is.null(filters),
-          !is.null(pagesize),
-          !is.null(page))) {
-
-    query <- build_search_query(fields = fields,
-                               filters = filters,
-                               pagesize = pagesize,
-                               page = page)
+  if (any(
+    !is.null(fields),
+    !is.null(filters),
+    !is.null(pagesize),
+    !is.null(page)
+  )) {
+    query <- build_search_query(
+      fields = fields,
+      filters = filters,
+      pagesize = pagesize,
+      page = page
+    )
   }
 
   res <- dkan_GET(url = url, query = query, credentials = credentials, ...)

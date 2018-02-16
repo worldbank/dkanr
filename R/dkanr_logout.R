@@ -10,20 +10,26 @@
 #'
 
 dkanr_logout <- function(url = get_url(),
-                         credentials = list(cookie = dkanr::get_cookie(),
-                                            token = dkanr::get_token())) {
+                         credentials = list(
+                           cookie = dkanr::get_cookie(),
+                           token = dkanr::get_token()
+                         )) {
   # Build url
   path <- "api/dataset/user/logout"
   url <- httr::modify_url(url, path = path)
 
   # authentication
-  api_auth_header <- httr::add_headers(.headers = c("Cookie" = credentials$cookie,
-                                                    "X-CSRF-Token" = credentials$token))
+  api_auth_header <- httr::add_headers(.headers = c(
+    "Cookie" = credentials$cookie,
+    "X-CSRF-Token" = credentials$token
+  ))
 
-  out <- httr::POST(url,
-                    httr::accept_json(),
-                    httr::content_type_json(),
-                    api_auth_header)
+  out <- httr::POST(
+    url,
+    httr::accept_json(),
+    httr::content_type_json(),
+    api_auth_header
+  )
   httr::stop_for_status(out, task = "logout. DKAN API has not been closed successfully")
   out <- httr::content(out)
 

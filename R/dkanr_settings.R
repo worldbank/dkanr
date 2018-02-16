@@ -9,9 +9,10 @@
 #' @examples
 #' dkanr_settings()
 dkanr_settings <- function() {
-  ops <- list(url = Sys.getenv("DKANR_URL", ""),
-              cookie = Sys.getenv("DKANR_COOKIE", ""),
-              token = Sys.getenv("DKANR_TOKEN", "")
+  ops <- list(
+    url = Sys.getenv("DKANR_URL", ""),
+    cookie = Sys.getenv("DKANR_COOKIE", ""),
+    token = Sys.getenv("DKANR_TOKEN", "")
   )
   structure(ops, class = "dkanr_settings")
 }
@@ -53,21 +54,26 @@ print.dkanr_settings <- function(x, ...) {
 dkanr_setup <- function(url = "http://demo.getdkan.com",
                         username = NULL,
                         password = NULL) {
-
   Sys.setenv("DKANR_URL" = url)
   if (!is.null(username) & !is.null(password)) {
     message("Opening anonymous session")
     sessid <- connect_system(root_url = url)
     message("Requesting session cookie")
-    cookie <- login_service(system_connect_sessid = sessid,
-                            username = username,
-                            password = password,
-                            root_url = url)
+    cookie <- login_service(
+      system_connect_sessid = sessid,
+      username = username,
+      password = password,
+      root_url = url
+    )
     message("Requesting session token")
-    token <- request_token(cookie = cookie,
-                           root_url = url)
-    token <- request_token(cookie = cookie,
-                           root_url = url)
+    token <- request_token(
+      cookie = cookie,
+      root_url = url
+    )
+    token <- request_token(
+      cookie = cookie,
+      root_url = url
+    )
     Sys.setenv("DKANR_COOKIE" = cookie)
     Sys.setenv("DKANR_TOKEN" = token)
   } else {
@@ -77,23 +83,23 @@ dkanr_setup <- function(url = "http://demo.getdkan.com",
 }
 
 
-#------------------------------------------------------------------------------#
+# ------------------------------------------------------------------------------#
 # Getters
 #
 #' @export
 #' @rdname dkanr_settings
 get_url <- function() {
   Sys.getenv("DKANR_URL")
-  }
+}
 
 #' @export
 #' @rdname dkanr_settings
 get_cookie <- function() {
   Sys.getenv("DKANR_COOKIE")
-  }
+}
 
 #' @export
 #' @rdname dkanr_settings
 get_token <- function() {
   Sys.getenv("DKANR_TOKEN")
-  }
+}

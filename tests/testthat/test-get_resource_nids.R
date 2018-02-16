@@ -1,6 +1,6 @@
 context("get_resource_nids")
 
-load('metadata.rda')
+load("metadata.rda")
 metadata_res <- metadata
 metadata_res$type <- "resource"
 
