@@ -4,10 +4,10 @@
 #'
 #' @param metadata list: Dataset level metadata
 #'
-#' @return
+#' @return character vector
 #' @export
 #'
-#' @examples
+
 get_resource_nids <- function(metadata) {
 
   # CHECK input

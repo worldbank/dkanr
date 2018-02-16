@@ -48,6 +48,7 @@ dkan_REQUEST <- function(verb, url, nid = NULL, body, credentials = list(cookie 
 # Helpers
 cc <- function(l) Filter(Negate(is.null), l)
 dk <- function() "api/dataset/node"
+dkfiles <- function() "sites//default//files"
 jsl <- function(x) jsonlite::fromJSON(x, simplifyVector = FALSE)
 jsldf <- function(x) tibble::as_data_frame(jsonlite::fromJSON(x, simplifyDataFrame = TRUE))
 ctj <- function() httr::content_type_json()
@@ -284,4 +285,19 @@ build_ds_search_query <- function(resource_id,
   out <- stringr::str_replace_all(out, pattern = "^&|&$", replacement = "")
 
   return(out)
-  }
+}
+
+# helper function to replace the default "public://" from DKAN download urls
+fix_download_url <- function(download_url) {
+  base_url <- file.path(get_url(), dkfiles())
+
+  out <- stringr::str_replace(download_url,
+                              pattern = "^public:",
+                              replacement = base_url)
+
+}
+
+
+
+
+
