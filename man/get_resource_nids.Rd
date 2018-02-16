@@ -9,6 +9,9 @@ get_resource_nids(metadata)
 \arguments{
 \item{metadata}{list: Dataset level metadata}
 }
+\value{
+character vector
+}
 \description{
 Returns all the resource node ids attached to a specific node id
 }

@@ -9,6 +9,9 @@ get_resource_url(metadata)
 \arguments{
 \item{metadata}{list: Resource level metadata}
 }
+\value{
+character vector
+}
 \description{
 Returns the download link or external page URL for a specific resource
 }
