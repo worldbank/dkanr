@@ -5,3 +5,6 @@
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^codecov\.yml$
+^CONTRIBUTING\.md$
+^ISSUE_TEMPLATE\.md$
+^SUPPORT\.md$

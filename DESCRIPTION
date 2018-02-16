@@ -1,23 +1,37 @@
 Package: dkanr
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.4.1)
+Title: R client for the DKAN API
+Version: 0.1.0
+Authors@R: c(
+    person("Tony", "Fujs",
+        role = c("aut", "cre"),
+        email = "tonyfujs@gmail.com"),
+    person("Meera", "Desai",
+        role = "ctb",
+        email = "mbdesai@umich.edu"),
+    person("Karthik", "Ramanathan",
+        role = "ctb",
+        email = "drkarthi@umich.edu")
+    )
+Description: Client for the DKAN API (https://dkan.readthedocs.io/en/latest/apis/index.html).
+    Provides functions to facilitate access to the DKAN API, including the DKAN REST API (metadata),
+    and the DKAN Datastore API (data).
 License: MIT + file LICENSE
+Depends: 
+    R (>= 3.2)
+Imports: 
+    assertthat (>= 0.2.0),
+    dplyr (>= 0.7.4),
+    httr (>= 1.3.1),
+    jsonlite (>= 1.5),
+    purrr (>= 0.2.4),
+    stringr (>= 1.2.0),
+    tibble (>= 1.4.2)
+Suggests: 
+    covr (>= 3.0.1),
+    knitr (>= 1.19),
+    rmarkdown (>= 1.8),
+    testthat (>= 2.0.0)
+VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-Imports: httr,
-    jsonlite,
-    assertthat,
-    purrr,
-    stringr,
-    dplyr,
-    tibble
 RoxygenNote: 6.0.1
-Suggests:
-    knitr,
-    rmarkdown,
-    testthat,
-    covr
-VignetteBuilder: knitr
