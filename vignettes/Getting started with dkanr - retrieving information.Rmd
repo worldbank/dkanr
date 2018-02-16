@@ -24,7 +24,7 @@ This short introduction vignette shows you how to:
 
 __Accessing data via a DKAN user interface__
 
-![Accessing data via a DKAN website](../inst/img/dkan_demo.gif)
+![](../inst/img/dkan_demo.gif)
 
 ## Setting Up Your Connection
 
