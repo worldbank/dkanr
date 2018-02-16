@@ -1,5 +1,7 @@
 context("get_resource_url")
 
+# Set up
+dkanr_setup(url = "https://datacatalog.worldbank.org")
 load("metadata.rda")
 load("metadata_rs_dkan.rda")
 load("metadata_rs_api.rda")
@@ -14,7 +16,7 @@ test_that("Non valid arguments generate an error", {
 test_that("field_resource URLs are correctly extracted", {
   expect_equal(
     get_resource_url(metadata_rs_dkan),
-    "https://datacatalog.worldbank.org//sites//default//files//dataset_resources/ddhfiles/public/ARG-CrowdsourcedPDCPilot02_final_obs_all_clean.csv"
+    "https://datacatalog.worldbank.org/sites//default//files//dataset_resources/ddhfiles/public/ARG-CrowdsourcedPDCPilot02_final_obs_all_clean.csv"
   )
   expect_equal(get_resource_url(metadata_rs_dkan2), "")
   expect_equal(
