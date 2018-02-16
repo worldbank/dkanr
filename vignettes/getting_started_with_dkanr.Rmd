@@ -22,9 +22,6 @@ This short introduction vignette shows you how to:
 * Access its metadata
 * Access download the .csv file of the data
 
-__Accessing data via a DKAN user interface__
-
-![](../inst/img/dkan_demo.gif)
 
 ## Setting Up Your Connection
 
