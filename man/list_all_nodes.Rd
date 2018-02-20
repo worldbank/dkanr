@@ -28,8 +28,10 @@ json, dkan_node (list), or data frame
 Returns list of nodes
 }
 \examples{
+\dontrun{
 list_all_nodes(url = "http://demo.getdkan.com")
 list_all_nodes(url = "http://demo.getdkan.com",
 fields = c('nid', 'type'),
 filters = c(type = 'resource'))
+}
 }

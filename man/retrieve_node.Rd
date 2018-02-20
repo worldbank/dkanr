@@ -25,5 +25,7 @@ dkan_node object
 Returns metadata associated with an existing DKAN Node ID.
 }
 \examples{
+\dontrun{
 retrieve_node(nid = 1, url = "http://demo.getdkan.com")
+}
 }
