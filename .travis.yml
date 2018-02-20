@@ -7,9 +7,5 @@ after_success:
     - Rscript -e 'covr::codecov()'
 after_failure:
   - ./travis-tool.sh dump_logs
-env:
-   global:
-     - CRAN="http://cran.rstudio.com"
-     - R_BUILD_ARGS="--no-build-vignettes --no-manual"
-     - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
-     - BOOTSTRAP_LATEX=""
+r_build_args: "--no-build-vignettes --no-manual"
+r_check_args: "--no-build-vignettes --no-manual --as-cran"
