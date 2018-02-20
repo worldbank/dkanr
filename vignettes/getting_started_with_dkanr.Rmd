@@ -16,11 +16,11 @@ vignette: >
 
 The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
 
-This short introduction vignette shows you how to:
+This brief introduction shows you how to:
 
-* Locate a dataset (the "Crowdsourced Price Data Collection Pilot"" dataset)
+* Locate a dataset
 * Access its metadata
-* Access download the .csv file of the data
+* Download a .csv file of the data
 
 
 ## Setting Up Your Connection
@@ -107,7 +107,7 @@ Retrieving data file attached your dataset follows a similar logic:
 get_resource_nids(metadata)
 ```
 
-### Use the resource node ID to retrieve the resource metadata  
+### Use the resource node ID to retrieve its metadata  
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 metadata_rs <- retrieve_node(nid ='140366', as = 'list')
@@ -128,7 +128,7 @@ get_resource_url(metadata_rs)
 
 
 ## Querying data
-Some data files may be directly queried through the API. Only data file that have been imported into the DKAN datastore can be queried through the API. 
+Some data files may be directly queried through the API. Only data files that have been imported into the DKAN datastore can be queried through the API. 
 
 ### Check if a data file is available on the DKAN datastore
 
