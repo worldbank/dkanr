@@ -7,6 +7,11 @@
 #' @return character vector
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' metadata <- retrieve_node(nid ='140366', as = 'list')
+#' get_resource_url(metadata)
+#' }
 
 get_resource_url <- function(metadata) {
 

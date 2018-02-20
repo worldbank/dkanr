@@ -7,6 +7,12 @@
 #' @return logical vector
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' metadata <- retrieve_node(nid ='140366', as = 'list')
+#' ds_is_available(metadata)
+#' }
+#'
 
 ds_is_available <- function(metadata) {
 
