@@ -4,7 +4,7 @@ date: "`r Sys.Date()`"
 output: 
  rmarkdown::html_vignette:
     toc: true
- md_document:
+ rmarkdown::md_document:
     toc: true
 vignette: >
   %\VignetteIndexEntry{Introduction to dkanr}
