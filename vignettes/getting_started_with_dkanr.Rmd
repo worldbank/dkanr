@@ -2,10 +2,12 @@
 title: "Getting started with dkanr - retrieving information"
 date: "`r Sys.Date()`"
 output: 
- rmarkdown::html_vignette:
+ rmarkdown::html_document:
     toc: true
+    keep_md: yes
  rmarkdown::md_document:
     toc: true
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{Introduction to dkanr}
   %\VignetteEncoding{UTF-8}
