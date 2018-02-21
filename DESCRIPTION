@@ -16,9 +16,9 @@ Description: Client for the DKAN API (https://dkan.readthedocs.io/en/latest/apis
     Provides functions to facilitate access to the DKAN API, including the DKAN REST API (metadata),
     and the DKAN Datastore API (data).
 License: MIT + file LICENSE
-Depends: 
+Depends:
     R (>= 3.2)
-Imports: 
+Imports:
     assertthat (>= 0.2.0),
     dplyr (>= 0.7.4),
     httr (>= 1.3.1),
@@ -26,11 +26,12 @@ Imports:
     purrr (>= 0.2.4),
     stringr (>= 1.2.0),
     tibble (>= 1.4.2)
-Suggests: 
+Suggests:
     covr (>= 3.0.1),
     knitr (>= 1.19),
     rmarkdown (>= 1.8),
-    testthat (>= 2.0.0)
+    testthat (>= 2.0.0),
+    httptest
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
