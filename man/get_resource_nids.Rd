@@ -15,3 +15,9 @@ character vector
 \description{
 Returns all the resource node ids attached to a specific node id
 }
+\examples{
+\dontrun{
+metadata <- retrieve_node(nid ='140177', as = 'list')
+get_resource_nids(metadata)
+}
+}

@@ -15,3 +15,10 @@ logical vector
 \description{
 Returns TRUE is a data file has been imported in the DKAN datastore, returns FALSE otherwise
 }
+\examples{
+\dontrun{
+metadata <- retrieve_node(nid ='140366', as = 'list')
+ds_is_available(metadata)
+}
+
+}

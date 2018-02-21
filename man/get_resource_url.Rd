@@ -15,3 +15,9 @@ character vector
 \description{
 Returns the download link or external page URL for a specific resource
 }
+\examples{
+\dontrun{
+metadata <- retrieve_node(nid ='140366', as = 'list')
+get_resource_url(metadata)
+}
+}
