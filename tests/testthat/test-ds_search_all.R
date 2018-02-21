@@ -7,6 +7,7 @@
 # # ds_search_all(resource_id = "e9362e88-33ef-4435-9c22-ec857684e425")
 # # stop_capturing()
 #
+
 # httptest::with_mock_api({
 #   test_that("Data is correctly retrieved from the datastore", {
 #     resp <- ds_search_all(resource_id = "e9362e88-33ef-4435-9c22-ec857684e425")
