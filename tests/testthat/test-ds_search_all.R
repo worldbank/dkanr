@@ -1,8 +1,16 @@
-# context("test-ds_search_all.R")
+# context("ds_search_all")
 #
-# test_that("correct number of records retrieved", {
-#   fields = c('Country','City','Region','Population')
-#   expect_equal(colnames(ds_search_all(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283',
-#                                       fields = fields)), fields)
-#   expect_equal(nrow(ds_search_all(resource_id = '10c578a6-63c4-40bd-a55d-0c27bf276283', num_records = 45)), 45)
+# # Set up
+# dkanr_setup(url = 'https://datacatalog.worldbank.org/')
+#
+# # start_capturing(path = './tests/testthat')
+# # ds_search_all(resource_id = "e9362e88-33ef-4435-9c22-ec857684e425")
+# # stop_capturing()
+#
+# httptest::with_mock_api({
+#   test_that("Data is correctly retrieved from the datastore", {
+#     resp <- ds_search_all(resource_id = "e9362e88-33ef-4435-9c22-ec857684e425")
+#     expect_is(resp, "list")
+#     expect_equal(length(resp), 100)
+#   })
 # })

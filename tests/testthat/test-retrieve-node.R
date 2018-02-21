@@ -8,7 +8,7 @@ context("test-retrieve-node.R")
 dkanr_setup(url = 'https://datacatalog.worldbank.org/')
 keys <- c("title", "status", "type", "uuid", "created", "changed", "body")
 
-with_mock_api({
+httptest::with_mock_api({
   test_that("JSON node is correctly returned", {
     metadata <- retrieve_node(nid ='140177', as = 'list')
     expect_true(is.list(metadata))
