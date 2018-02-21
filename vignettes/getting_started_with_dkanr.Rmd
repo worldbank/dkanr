@@ -2,7 +2,7 @@
 title: "Getting started with dkanr - retrieving information"
 date: "`r Sys.Date()`"
 output: 
- rmarkdown::html_document:
+ rmarkdown::html_vignette:
     toc: true
     keep_md: yes
  rmarkdown::md_document:
@@ -14,20 +14,21 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-## Introduction to dkanr
+# Introduction to dkanr
 
 The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
 
-This brief introduction shows you how to:
+This brief introduction focuses on a simple use case of downloading data for a specific data set. In the process, we will see how to:
 
-* Locate a dataset
-* Access its metadata
-* Download a .csv file of the data
+1. Set-up your connection
+2. Locate a dataset
+3. Access its metadata
+4. Download the attached data
 
 
-## Setting Up Your Connection
+# Step 1: Setting Up Your Connection
 
-### Connection without authentication
+## Connection without authentication
 
 To set-up a connection without authentication, you just need the site URL. 
 
@@ -38,7 +39,7 @@ library(dplyr)
 dkanr_setup(url = 'https://datacatalog.worldbank.org/')
 ```
 
-### Authenticated connection
+## Authenticated connection
 If authentication is required, you will also need to specify your username and password.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
@@ -53,7 +54,7 @@ You can verify that you are successfully connected by printing your connection i
 dkanr_settings()
 ```
 
-## STEP 1: List all available datasets with `list_all_nodes()`
+# Step 2: List all available datasets with `list_all_nodes()`
 
 While exploring the offerings of the catalog, you can retrieve all the available datasets with a simple query.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -63,13 +64,13 @@ resp %>%
   head(n = 10)
 ```
 
-## STEP 2: Access metadata for a specific dataset node
+# STEP 3: Access metadata for a specific dataset node
 
 Say we are interested in the following dataset: "Crowdsourced Price Data Collection Pilot". The metadata for this node can be retrieved as follows: 
 1. Identify the dataset node ID
 2. Use the node ID to retrieve the dataset metadata
 
-### Identify the dataset node ID  
+## Identify the dataset node ID  
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 resp %>%
@@ -77,7 +78,7 @@ resp %>%
   select(nid, title, uri, type)
 ```
 
-### Use the node ID to retrieve the dataset metadata  
+## Use the node ID to retrieve the dataset metadata  
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 metadata <- retrieve_node(nid ='140177', as = 'list')
@@ -96,10 +97,10 @@ names(metadata)[1:30]
 metadata$title
 ```
 
-## STEP 3: Access data for a specific resource node
-Retrieving data file attached your dataset follows a similar logic:
-1. Identify the resource node IDs
-2. Use the resource node IDs to access metadata and URLs
+# STEP 4: Access data for a specific resource node
+Data can be dowloaded either as a batch download, or via an API call.
+
+## Batch download
 
 ### Retrieve the resource Node IDs
 
@@ -129,7 +130,7 @@ get_resource_url(metadata_rs)
 ```
 
 
-## Querying data
+## API call
 Some data files may be directly queried through the API. Only data files that have been imported into the DKAN datastore can be queried through the API. 
 
 ### Check if a data file is available on the DKAN datastore
