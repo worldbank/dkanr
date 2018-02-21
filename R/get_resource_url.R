@@ -18,7 +18,9 @@ get_resource_url <- function(metadata) {
   # CHECK input
   assertthat::assert_that(
     is.list(metadata) == TRUE,
-    msg = "metadata must be a list"
+    msg = 'metadata must be a list. The dkanr::retrieve_node() function gives you the option
+    retrieve metadata either as raw JSON or as a list. Make sure you specify the "as"
+    argument as follows: retrieve_node(nid = xxxx, as = "list")'
   )
   assertthat::assert_that(
     metadata$type == "resource",
