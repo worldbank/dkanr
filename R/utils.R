@@ -320,4 +320,6 @@ fix_download_url <- function(download_url) {
     pattern = "^public:",
     replacement = base_url
   )
+
+  return(out)
 }
