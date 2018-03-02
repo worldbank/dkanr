@@ -3,6 +3,8 @@
 [![Coverage status](https://codecov.io/gh/tonyfujs/dkanr/branch/master/graph/badge.svg)](https://codecov.io/github/tonyfujs/dkanr?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/dkanr)](https://cran.r-project.org/package=dkanr)
 [![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/tonyfujs/dkanr/master)
+[![Licence](https://img.shields.io/badge/licence-MIT+-lightgrey.svg)](http://choosealicense.com/)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
 
 # dkanr
