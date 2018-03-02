@@ -10,16 +10,16 @@
 #' (x <- as.dkan_node("22"))
 #' as.dkan_node(x)
 
-as.dkan_node <- function(x, ...) UseMethod("as.dkan_node")
-
-#' @export
-as.dkan_node.character <- function(x, ...) retrieve_node(x, ...)
-
-#' @export
-as.dkan_node.dkan_node <- function(x, ...) x
-
-#' @export
-as.dkan_node.list <- function(x, ...) structure(x, class = "dkan_node")
+#' as.dkan_node <- function(x, ...) UseMethod("as.dkan_node")
+#'
+#' #' @export
+#' as.dkan_node.character <- function(x, ...) retrieve_node(x, ...)
+#'
+#' #' @export
+#' as.dkan_node.dkan_node <- function(x, ...) x
+#'
+#' #' @export
+#' as.dkan_node.list <- function(x, ...) structure(x, class = "dkan_node")
 
 #' @export
 #' @rdname as.dkan_node
