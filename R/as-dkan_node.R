@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @param x Variety of things, character, list, or dkan_node class object
-#' @param ... Further args passed on to \code{\link{retrieve_node}} if character given
+
 #' # create item class from only an item ID
 #' as.dkan_node("22")
 #'
@@ -22,7 +22,7 @@
 #' as.dkan_node.list <- function(x, ...) structure(x, class = "dkan_node")
 
 #' @export
-#' @rdname as.dkan_node
+#' @rdname is.dkan_node
 is.dkan_node <- function(x) inherits(x, "dkan_node")
 
 #' @export
