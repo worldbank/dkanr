@@ -5,6 +5,7 @@
 [![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/tonyfujs/dkanr/master)
 [![Licence](https://img.shields.io/badge/licence-MIT+-lightgrey.svg)](http://choosealicense.com/)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-green.svg?style=flat)](https://github.com/dkanr)
 
 
 # dkanr
