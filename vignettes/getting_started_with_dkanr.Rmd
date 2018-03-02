@@ -36,7 +36,7 @@ To set-up a connection without authentication, you just need the site URL.
 library(purrr)
 library(dkanr)
 library(dplyr)
-dkanr_setup(url = 'https://datacatalog.worldbank.org/')
+dkanr_setup(url = 'https://data.louisvilleky.gov')
 ```
 
 ## Authenticated connection
@@ -61,12 +61,13 @@ While exploring the offerings of the catalog, you can retrieve all the available
 resp <- list_all_nodes(filters = c(type = 'dataset'), as = 'df')
 resp %>%
   select(nid, title, uri, type) %>%
+  arrange(title) %>%
   head(n = 10)
 ```
 
 # STEP 3: Access metadata for a specific dataset node
 
-Say we are interested in the following dataset: "Crowdsourced Price Data Collection Pilot". The metadata for this node can be retrieved as follows: 
+Say we are interested in the following dataset: "Active Permits". The metadata for this node can be retrieved as follows: 
 1. Identify the dataset node ID
 2. Use the node ID to retrieve the dataset metadata
 
@@ -74,14 +75,14 @@ Say we are interested in the following dataset: "Crowdsourced Price Data Collect
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 resp %>%
-  filter(title == 'Crowdsourced Price Data Collection Pilot') %>%
+  filter(title == 'Active Permits') %>%
   select(nid, title, uri, type)
 ```
 
 ## Use the node ID to retrieve the dataset metadata  
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-metadata <- retrieve_node(nid ='140177', as = 'list')
+metadata <- retrieve_node(nid ='8216', as = 'list')
 metadata
 ```
 
@@ -113,7 +114,7 @@ get_resource_nids(metadata)
 ### Use the resource node ID to retrieve its metadata  
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-metadata_rs <- retrieve_node(nid ='140366', as = 'list')
+metadata_rs <- retrieve_node(nid ='8221', as = 'list')
 metadata_rs
 ```
 
@@ -146,7 +147,7 @@ ds_search_all(resource_id = metadata_rs$uuid, as = 'df') %>%
   select(item_name, item_code, price)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 temp <- ds_search(resource_id = metadata_rs$uuid)
 dplyr::bind_rows(temp) %>%
   select(item_name, item_code, price)
