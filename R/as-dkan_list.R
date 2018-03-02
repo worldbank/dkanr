@@ -20,7 +20,7 @@
 is.dkan_list <- function(x) inherits(x, "dkan_list")
 
 #' @export
-print.dkan_list <- function(x) {
+print.dkan_list <- function(x, ...) {
   cat(paste0("<DKAN List> containing ", length(x), " nodes"), "\n")
   cat("  First node: ", x[[1]]$nid, "\n", sep = "")
   cat("  Last node: ", x[[length(x)]]$nid, "\n", sep = "")
