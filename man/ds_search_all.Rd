@@ -31,7 +31,7 @@ ds_search_all(resource_id, fields = NULL, filters = NULL,
 \item{as}{character: output format - json, list or data frame}
 }
 \value{
-list or character
+character, list, or data frame
 }
 \description{
 Search csv resource file stored in the datastore.
