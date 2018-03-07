@@ -10,8 +10,13 @@ keys <- c("title", "status", "type", "uuid", "created", "changed", "body")
 
 httptest::with_mock_api({
   test_that("JSON node is correctly returned", {
-    metadata <- retrieve_node(nid ='140177', as = 'list')
-    expect_true(is.list(metadata))
-    expect_true(all(keys %in% names(metadata)))
+    resp <- retrieve_node(nid ='140177', as = 'list')
+    expect_true(is.list(resp))
+    expect_true(all(keys %in% names(resp)))
+  })
+
+  test_that("JSON is returned by default", {
+    resp <- retrieve_node(nid ='140177')
+    expect_is(resp, "character")
   })
 })

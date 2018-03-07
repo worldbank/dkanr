@@ -1,0 +1,54 @@
+{
+  "title": "title",
+  "type": "dataset",
+  "body": {
+    "und": [
+      {
+        "value": "body"
+      }
+    ]
+  },
+  "field_wbddh_acronym": {
+    "und": [
+      {
+        "value": "acronym"
+      }
+    ]
+  },
+  "field_wbddh_data_type": {
+    "und": 
+    	"294"
+  },
+  "field_wbddh_data_class": {
+    "und": 
+    	"358"
+  },
+  "field_topic": {
+    "und": 
+      "366"
+  },
+  "field_frequency": {
+    "und": 
+    	"3"
+  },
+  "field_wbddh_country": {
+    "und": 
+      "169"
+  },
+  "field_wbddh_terms_of_use": {
+    "und": 
+    	"440"
+  },
+  "field_wbddh_economy_coverage": {
+    "und": 
+      "288"
+  },
+   "field_license_wbddh": {
+    "und":
+    	"1345"
+  },
+  "field_wbddh_languages_supported": {
+    "und": 
+      "337"
+  }
+} 

@@ -15,10 +15,10 @@ httptest::with_mock_api({
     expect_true(is.list(resp))
   })
 
-    test_that("ds_search_all returns json when as = 'json'", {
+    test_that("ds_search_all returns character when as = 'json'", {
       resp <- ds_search_all(resource_id = "65c4458b-1804-4bf2-b647-b2744648f647",
                             as = "json")
-      expect_true(class(resp) == "json")
+      expect_true(class(resp) == "character")
     })
 
   # test_that("ds_search_all returns df when as = 'df'", {
@@ -26,4 +26,9 @@ httptest::with_mock_api({
   #                         as = "df")
   #   expect_true(is.data.frame(resp))
   # })
+
+    # test_that("data.frame is returned by default", {
+    #   resp <- ds_search_all(resource_id = "65c4458b-1804-4bf2-b647-b2744648f647")
+    #   expect_is(resp, "data.frame")
+    # })
 })

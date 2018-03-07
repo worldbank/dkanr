@@ -13,4 +13,9 @@ httptest::with_mock_api({
     expect_is(resp, "data.frame")
     expect_equal(nrow(resp), 20)
   })
+
+  test_that("JSON is returned by default", {
+    resp <- list_nodes()
+    expect_is(resp, "character")
+  })
 })
