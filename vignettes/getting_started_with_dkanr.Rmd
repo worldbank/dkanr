@@ -150,13 +150,13 @@ If this is the case, you'll be able to retrieve data directly from the datastore
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 ds_search_all(resource_id = metadata_rs$uuid, as = 'df') %>%
-  select(item_name, item_code, price)
+  select(PERMITNUMBER, PERMITTYPE, STATUS, SQUAREFEET)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 temp <- ds_search(resource_id = metadata_rs$uuid)
 dplyr::bind_rows(temp) %>%
-  select(item_name, item_code, price)
+  select(PERMITNUMBER, PERMITTYPE, STATUS, SQUAREFEET)
 ```
 
 ```{r, include=FALSE}
