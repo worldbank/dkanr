@@ -6,7 +6,9 @@ context("test-dkanr_settings.R")
 
 httptest::with_mock_api({
   test_that("dkanr_settings functions work as expected", {
-    dkanr_setup(url = 'https://data.louisvilleky.gov/')
+    temp <- dkanr_setup(url = 'https://data.louisvilleky.gov/')
+
+    expect_true(temp)
 
     expect_equal(get_url(), "https://data.louisvilleky.gov/")
     expect_equal(get_cookie(), "")

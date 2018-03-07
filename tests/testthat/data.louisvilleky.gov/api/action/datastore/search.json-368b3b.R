@@ -1,0 +1,42 @@
+structure(list(url = "https://data.louisvilleky.gov/api/action/datastore/search.json?resource_id=0000&offset=0&limit=100", 
+    status_code = 503L, headers = structure(list(server = "nginx", 
+        date = "Wed, 07 Mar 2018 18:04:45 GMT", `content-type` = "text/html", 
+        `content-length` = "540", connection = "keep-alive", 
+        `last-modified` = "Sun, 03 Sep 2017 22:55:04 GMT", etag = "\"59ac8848-21c\"", 
+        `accept-ranges` = "bytes", `x-varnish` = "52060441", 
+        age = "0", via = "1.1 varnish-v4", `x-cache` = "MISS"), .Names = c("server", 
+    "date", "content-type", "content-length", "connection", "last-modified", 
+    "etag", "accept-ranges", "x-varnish", "age", "via", "x-cache"
+    ), class = c("insensitive", "list")), all_headers = list(
+        structure(list(status = 503L, version = "HTTP/1.1", headers = structure(list(
+            server = "nginx", date = "Wed, 07 Mar 2018 18:04:45 GMT", 
+            `content-type` = "text/html", `content-length` = "540", 
+            connection = "keep-alive", `last-modified` = "Sun, 03 Sep 2017 22:55:04 GMT", 
+            etag = "\"59ac8848-21c\"", `accept-ranges` = "bytes", 
+            `x-varnish` = "52060441", age = "0", via = "1.1 varnish-v4", 
+            `x-cache` = "MISS"), .Names = c("server", "date", 
+        "content-type", "content-length", "connection", "last-modified", 
+        "etag", "accept-ranges", "x-varnish", "age", "via", "x-cache"
+        ), class = c("insensitive", "list"))), .Names = c("status", 
+        "version", "headers"))), cookies = structure(list(domain = logical(0), 
+        flag = logical(0), path = logical(0), secure = logical(0), 
+        expiration = structure(numeric(0), class = c("POSIXct", 
+        "POSIXt")), name = logical(0), value = logical(0)), .Names = c("domain", 
+    "flag", "path", "secure", "expiration", "name", "value"), row.names = integer(0), class = "data.frame"), 
+    content = charToRaw("<!DOCTYPE html>\n<html>\n<head>\n<title>Technical Difficulties</title>\n<style type=\"text/css\">\n  body {background:#fafafa; padding:5px 15px 5px 15px; font-family: Tahoma, Arial, Helvetica, sans-serif !important; color: #333333;}\n  h3, p {text-align: center;}\n</style>\n</head>\n<body>\n<img\n<h3>Temporarily Unavailable</h3>\n\n<p>The website that you're trying to reach is having technical difficulties and is currently unavailable.</p>\n<p>We are aware of the issue and are working hard to fix it. Thank you for your patience.</p>\n\n</body>\n</html>\n"), 
+    date = structure(1520445885, class = c("POSIXct", "POSIXt"
+    ), tzone = "GMT"), times = structure(c(0, 1e-06, 1e-06, 1e-06, 
+    0.109, 0.109), .Names = c("redirect", "namelookup", "connect", 
+    "pretransfer", "starttransfer", "total")), request = structure(list(
+        method = "GET", url = "https://data.louisvilleky.gov/api/action/datastore/search.json?resource_id=0000&offset=0&limit=100", 
+        headers = structure(c("application/json, text/xml, application/xml, */*", 
+        "application/json", "utf-8", "", ""), .Names = c("Accept", 
+        "Content-Type", "charset", "Cookie", "X-CSRF-Token")), 
+        fields = NULL, options = structure(list(useragent = "libcurl/7.56.1 r-curl/3.1 httr/1.3.1", 
+            cainfo = "C:/PROGRA~1/R/R-34~1.3/etc/curl-ca-bundle.crt", 
+            httpget = TRUE), .Names = c("useragent", "cainfo", 
+        "httpget")), output = structure(list(), class = c("write_memory", 
+        "write_function"))), .Names = c("method", "url", "headers", 
+    "fields", "options", "output"), class = "request")), .Names = c("url", 
+"status_code", "headers", "all_headers", "cookies", "content", 
+"date", "times", "request"), class = "response")
