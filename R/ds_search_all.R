@@ -84,14 +84,6 @@ ds_search_all <- function(resource_id,
     num_records_remaining <- num_records_remaining - limit
   }
 
-  # Handle possible null value
-  out <- purrr::modify_depth(out, .depth = 2, function(x) {
-    if (is.null(x)) {
-      NA
-    } else {
-      x
-    }})
-
   # return the data in specified format
   switch(as, json = as.character(jsonlite::toJSON(out)), list = res, df = dplyr::bind_rows(out))
 }

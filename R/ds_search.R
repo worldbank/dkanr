@@ -58,6 +58,19 @@ ds_search <- function(resource_id,
     )),
     encode = "json"
   )
+
+
   err_handler(res)
-  httr::content(res)$result$records
+
+  out <- httr::content(res)$result$records
+
+  # Handle possible null value
+  out <- purrr::modify_depth(out, .depth = 2, function(x) {
+    if (is.null(x)) {
+      NA
+    } else {
+      x
+    }})
+
+  return(out)
 }
