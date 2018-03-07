@@ -54,11 +54,11 @@ You can verify that you are successfully connected by printing your connection i
 dkanr_settings()
 ```
 
-# Step 2: List all available datasets with `list_all_nodes()`
+# Step 2: List all available datasets with `list_nodes_all()`
 
 While exploring the offerings of the catalog, you can retrieve all the available datasets with a simple query.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-resp <- list_all_nodes(filters = c(type = 'dataset'), as = 'df')
+resp <- list_nodes_all(filters = c(type = 'dataset'), as = 'df')
 resp %>%
   select(nid, title, uri, type) %>%
   arrange(title) %>%

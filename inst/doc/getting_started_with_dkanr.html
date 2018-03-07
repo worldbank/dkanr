@@ -78,7 +78,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#connection-without-authentication">Connection without authentication</a></li>
 <li><a href="#authenticated-connection">Authenticated connection</a></li>
 </ul></li>
-<li><a href="#step-2-list-all-available-datasets-with-list_all_nodes">Step 2: List all available datasets with <code>list_all_nodes()</code></a></li>
+<li><a href="#step-2-list-all-available-datasets-with-list_nodes_all">Step 2: List all available datasets with <code>list_nodes_all()</code></a></li>
 <li><a href="#step-3-access-metadata-for-a-specific-dataset-node">STEP 3: Access metadata for a specific dataset node</a><ul>
 <li><a href="#identify-the-dataset-node-id">Identify the dataset node ID</a></li>
 <li><a href="#use-the-node-id-to-retrieve-the-dataset-metadata">Use the node ID to retrieve the dataset metadata</a></li>
@@ -132,10 +132,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##   Token:</code></pre>
 </div>
 </div>
-<div id="step-2-list-all-available-datasets-with-list_all_nodes" class="section level1">
-<h1>Step 2: List all available datasets with <code>list_all_nodes()</code></h1>
+<div id="step-2-list-all-available-datasets-with-list_nodes_all" class="section level1">
+<h1>Step 2: List all available datasets with <code>list_nodes_all()</code></h1>
 <p>While exploring the offerings of the catalog, you can retrieve all the available datasets with a simple query.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resp &lt;-<span class="st"> </span><span class="kw">list_all_nodes</span>(<span class="dt">filters =</span> <span class="kw">c</span>(<span class="dt">type =</span> <span class="st">'dataset'</span>), <span class="dt">as =</span> <span class="st">'df'</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resp &lt;-<span class="st"> </span><span class="kw">list_nodes_all</span>(<span class="dt">filters =</span> <span class="kw">c</span>(<span class="dt">type =</span> <span class="st">'dataset'</span>), <span class="dt">as =</span> <span class="st">'df'</span>)
 resp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(nid, title, uri, type) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(title) <span class="op">%&gt;%</span>
