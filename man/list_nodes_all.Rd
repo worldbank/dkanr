@@ -29,7 +29,6 @@ Returns list of nodes
 }
 \examples{
 \dontrun{
-list_nodes_all(url = "http://demo.getdkan.com")
 list_nodes_all(url = "http://demo.getdkan.com",
 fields = c('nid', 'type'),
 filters = c(type = 'resource'))

@@ -1,5 +1,5 @@
 ---
-title: "Getting started with dkanr - retrieving information"
+title: "Getting started with dkanr"
 date: "`r Sys.Date()`"
 output: 
  rmarkdown::html_vignette:
@@ -14,13 +14,18 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+```{r, include=FALSE}
+library(httptest)
+start_vignette("vignette-name")
+```
+
 # Introduction to dkanr
 
-The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
+The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). `dkanr` implements all the methods available via the DKAN REST API and DKAN datastore API. Additionnally, it provides a few wrapper functions to facilitate interacting with the DKAN API from `R`.
 
-This brief introduction focuses on a simple use case of downloading data for a specific data set. In the process, we will see how to:
+In this brief introduction, we will see how to download data from a specific data set. In the process, we will see how to:
 
-1. Set-up your connection
+1. Set-up a connection
 2. Locate a dataset
 3. Access its metadata
 4. Download the attached data
@@ -40,7 +45,7 @@ dkanr_setup(url = 'https://data.louisvilleky.gov')
 ```
 
 ## Authenticated connection
-If authentication is required, you will also need to specify your username and password.
+If authentication is required, you will also need to provide a valid username and password.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 dkanr_setup(url = 'http://demo.getdkan.com',
@@ -56,24 +61,29 @@ dkanr_settings()
 
 # Step 2: List all available datasets with `list_nodes_all()`
 
-While exploring the offerings of the catalog, you can retrieve all the available datasets with a simple query.
+While exploring the offerings of a catalog, you can retrieve all the available datasets with a simple query.
+
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Get a list of all datasets
 resp <- list_nodes_all(filters = c(type = 'dataset'), as = 'df')
+# Print the first 10 datasets
 resp %>%
-  select(nid, title, uri, type) %>%
+  select(nid, title, uri) %>%
   arrange(title) %>%
   head(n = 10)
 ```
 
-# STEP 3: Access metadata for a specific dataset node
+# Step 3: Access metadata for a specific dataset node
 
-Say we are interested in the following dataset: "Active Permits". The metadata for this node can be retrieved as follows: 
-1. Identify the dataset node ID
-2. Use the node ID to retrieve the dataset metadata
+Say you are interested in a specific dataset from the catalog, for instance, the "Active Permits" dataset. You can easily retrieve this dataset metadata using the dataset __node ID__.  
+
+1. First, identify the dataset node ID  
+2. Then, use the node ID to retrieve the dataset metadata
 
 ## Identify the dataset node ID  
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Print only the "Active Permits" dataset information
 resp %>%
   filter(title == 'Active Permits') %>%
   select(nid, title, uri, type)
@@ -92,63 +102,63 @@ names(metadata)[1:30]
 ```
 
 
-
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 # Access specific metadata fields
 metadata$title
 ```
 
-# STEP 4: Access data for a specific resource node
-Data can be dowloaded either as a batch download, or via an API call.
+# Step 4: Access data for a specific resource node
 
-## Batch download
+Once you have identified a dataset of interest, you will probably want to download actual data. Multiple data files and documents may be attached to a single dataset, so you'll first need to list all the resources (data files, and other type of documents) that are linked to the dataset you are interested in.
 
-### Retrieve the resource Node IDs
-
-17 resources are attached to this dataset
+Here, a single resource is attached to the "Active Permits" dataset
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 get_resource_nids(metadata)
 ```
 
-### Use the resource node ID to retrieve its metadata  
+You can then use the resource __node ID__ to retrieve its metadata.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 metadata_rs <- retrieve_node(nid ='8221', as = 'list')
 metadata_rs
 ```
 
+Data can then be dowloaded either as  
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-# All metadata fields
-names(metadata_rs)[1:30]
-```
+* a batch download, 
+* or via an API call.
 
-### Retrieve the resource URL from the resource metadata
+## Batch download
+
+Retrieve the resource URL from the resource metadata
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 get_resource_url(metadata_rs)
 ```
 
-
 ## API call
 Some data files may be directly queried through the API. Only data files that have been imported into the DKAN datastore can be queried through the API. 
 
-### Check if a data file is available on the DKAN datastore
+First, you'll need to check if the data file you are interested in is available from the DKAN datastore 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ds_is_available(metadata_rs)
 ```
 
-### Retrieve data from the datastore via the API
+If this is the case, you'll be able to retrieve data directly from the datastore. In order to do so, you'll have to use the resource UUID (Just another unique ID number)
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
 ds_search_all(resource_id = metadata_rs$uuid, as = 'df') %>%
   select(item_name, item_code, price)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, eval=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 temp <- ds_search(resource_id = metadata_rs$uuid)
 dplyr::bind_rows(temp) %>%
   select(item_name, item_code, price)
+```
+
+```{r, include=FALSE}
+end_vignette()
 ```
