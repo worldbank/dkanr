@@ -11,13 +11,9 @@
 
 ## Overview
 
-The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html). Through the DKAN REST API, `dkanr` accesses the available catalog while providing CRUD functionalities.
+[DKAN](https://getdkan.org/) is an open data platform that enables publication and consumption of open data.
 
-Some features of this package include:
-
-* Uploading content
-* Authorized access to catalog
-* Updating data
+The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedocs.io/en/latest/apis/rest-api.html) that aims to facilitate the consumption, updating, and publication of content to open data platforms powered by DKAN. 
 
 ## Installation
 
