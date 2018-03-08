@@ -12,6 +12,7 @@ Authors@R: c(
         role = "aut",
         email = "drkarthi@umich.edu")
     )
+Maintainer: Tony Fujs <tonyfujs@gmail.com>
 Description: Client for the DKAN API (<https://dkan.readthedocs.io/en/latest/apis/index.html>).
     Provides functions to facilitate access to the DKAN API, including the DKAN REST API (metadata),
     and the DKAN Datastore API (data).
