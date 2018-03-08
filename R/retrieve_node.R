@@ -15,7 +15,11 @@
 #' \dontrun{
 #' retrieve_node(nid = 1, url = "http://demo.getdkan.com")
 #' }
-retrieve_node <- function(nid, url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), as = "json", ...) {
+retrieve_node <- function(nid,
+                          url = get_url(),
+                          credentials = list(cookie = dkanr::get_cookie(),
+                                             token = dkanr::get_token()),
+                          as = "json", ...) {
   # CHECK: input validity
   assertthat::assert_that(
     !is.null(nid),

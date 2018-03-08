@@ -23,7 +23,8 @@ node_id <- 126574
 # })
 
 test_that("Incorrect paths are correctly handled", {
-  expect_error(attach_file_to_node(nid = node_id, file_path = "incorrect/path/file.csv"),
+  expect_error(attach_file_to_node(nid = node_id,
+                                   file_path = "incorrect/path/file.csv"),
                regexp = "file.exists(path)*")
 })
 

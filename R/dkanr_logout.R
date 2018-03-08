@@ -30,7 +30,8 @@ dkanr_logout <- function(url = get_url(),
     httr::content_type_json(),
     api_auth_header
   )
-  httr::stop_for_status(out, task = "logout. DKAN API has not been closed successfully")
+  httr::stop_for_status(out,
+                        task = "logout. DKAN API has not been closed successfully")
   out <- httr::content(out)
 
   return(out)

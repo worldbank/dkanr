@@ -11,56 +11,65 @@ test_that("single field works", {
 
 test_that("multiple fields work", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, fields = c("Country", "City", "Population")),
+    build_ds_search_query(resource_id = resource_id,
+                          fields = c("Country", "City", "Population")),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&fields=Country,City,Population"
   )
 })
 
 test_that("single filter works", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, filters = list("Country" = c("co", "my"))),
+    build_ds_search_query(resource_id = resource_id,
+                          filters = list("Country" = c("co", "my"))),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&filters[Country]=co,my"
   )
 })
 
 test_that("multiple filters work", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, filters = list("Country" = c("co", "my"), "Region" = c("04", "09", "22"))),
+    build_ds_search_query(resource_id = resource_id,
+                          filters = list("Country" = c("co", "my"),
+                                         "Region" = c("04", "09", "22"))),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&filters[Country]=co,my&filters[Region]=04,09,22"
   )
 })
 
 test_that("single sort works", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, sort = c("Country" = "asc")),
+    build_ds_search_query(resource_id = resource_id,
+                          sort = c("Country" = "asc")),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&sort[Country]=asc"
   )
 })
 
 test_that("multiple sorts work", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, sort = c("Country" = "asc", "Region" = "desc")),
+    build_ds_search_query(resource_id = resource_id,
+                          sort = c("Country" = "asc", "Region" = "desc")),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&sort[Country]=asc&sort[Region]=desc"
   )
 })
 
 test_that("text search works", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, q = "puertica"),
+    build_ds_search_query(resource_id = resource_id,
+                          q = "puertica"),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&query=puertica"
   )
 })
 
 test_that("offset works", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, offset = 10),
+    build_ds_search_query(resource_id = resource_id,
+                          offset = 10),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&offset=10"
   )
 })
 
 test_that("limit works", {
   expect_equal(
-    build_ds_search_query(resource_id = resource_id, limit = 20),
+    build_ds_search_query(resource_id = resource_id,
+                          limit = 20),
     "resource_id=10c578a6-63c4-40bd-a55d-0c27bf276283&limit=20"
   )
 })

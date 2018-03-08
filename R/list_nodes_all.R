@@ -19,7 +19,12 @@
 #' filters = c(type = 'resource'))
 #' }
 
-list_nodes_all <- function(url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), fields = NULL, filters = NULL, as = "df", ...) {
+list_nodes_all <- function(url = get_url(),
+                           credentials = list(cookie = dkanr::get_cookie(),
+                                              token = dkanr::get_token()),
+                           fields = NULL,
+                           filters = NULL,
+                           as = "df", ...) {
   # Initialize looping parameters
   out <- vector(mode = "list", length = 1000)
   p <- 0

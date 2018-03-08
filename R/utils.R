@@ -1,20 +1,41 @@
-dkan_DELETE <- function(url, nid, body = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...) {
+dkan_DELETE <- function(url,
+                        nid,
+                        body = NULL,
+                        credentials = list(cookie = dkanr::get_cookie(),
+                                           token = dkanr::get_token()), ...) {
   dkan_REQUEST("DELETE", url, nid, body = body, credentials = credentials, ...)
 }
 
-dkan_PUT <- function(url, nid, body = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...) {
+dkan_PUT <- function(url,
+                     nid,
+                     body = NULL,
+                     credentials = list(cookie = dkanr::get_cookie(),
+                                        token = dkanr::get_token()), ...) {
   dkan_REQUEST("PUT", url, nid, body = body, credentials = credentials, ...)
 }
 
-dkan_POST <- function(url, body = NULL, query = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...) {
+dkan_POST <- function(url,
+                      body = NULL,
+                      query = NULL,
+                      credentials = list(cookie = dkanr::get_cookie(),
+                                         token = dkanr::get_token()), ...) {
   dkan_REQUEST("POST", url, nid = NULL, body = body, query = query, credentials = credentials, ...)
 }
 
-dkan_GET <- function(url, nid = NULL, query = NULL, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...) {
+dkan_GET <- function(url,
+                     nid = NULL,
+                     query = NULL,
+                     credentials = list(cookie = dkanr::get_cookie(),
+                                        token = dkanr::get_token()), ...) {
   dkan_REQUEST("GET", url, nid = nid, body = NULL, query = query, credentials = credentials, ...)
 }
 
-dkan_REQUEST <- function(verb, url, nid = NULL, body, credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()), ...) {
+dkan_REQUEST <- function(verb,
+                         url,
+                         nid = NULL,
+                         body,
+                         credentials = list(cookie = dkanr::get_cookie(),
+                                            token = dkanr::get_token()), ...) {
   REQUEST <- getExportedValue("httr", verb)
   url <- notrail(url)
   url <- if (is.null(nid)) {

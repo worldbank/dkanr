@@ -38,7 +38,8 @@ ds_search_all <- function(resource_id,
                           sort = NULL,
                           q = NULL,
                           url = get_url(),
-                          credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
+                          credentials = list(cookie = dkanr::get_cookie(),
+                                             token = dkanr::get_token()),
                           as = "df") {
   # authentication
   cookie <- credentials$cookie
@@ -85,5 +86,8 @@ ds_search_all <- function(resource_id,
   }
 
   # return the data in specified format
-  switch(as, json = as.character(jsonlite::toJSON(out)), list = res, df = dplyr::bind_rows(out))
+  switch(as,
+         json = as.character(jsonlite::toJSON(out)),
+         list = res,
+         df = dplyr::bind_rows(out))
 }

@@ -22,7 +22,8 @@
 #'                filters = c(type='resource'))
 #'                }
 list_nodes <- function(url = get_url(),
-                       credentials = list(cookie = dkanr::get_cookie(), token = dkanr::get_token()),
+                       credentials = list(cookie = dkanr::get_cookie(),
+                                          token = dkanr::get_token()),
                        fields = NULL,
                        filters = NULL,
                        pagesize = NULL,
