@@ -6,10 +6,7 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![develVersion](https://img.shields.io/badge/devel%20version-0.1.0-green.svg?style=flat)](https://github.com/dkanr)
 
-
 # dkanr
-
-## Overview
 
 [DKAN](https://getdkan.org/) is an open data platform that enables publication and consumption of open data.
 
@@ -17,17 +14,19 @@ The `dkanr` package is an R client to the [DKAN REST API](https://dkan.readthedo
 
 ## Installation
 
-You may install the package directly from GitHub:
-```r
-devtools::install_github("tfujs/dkanr")
+You can install the released version of dkanr from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("dkanr")
 ```
 
-Once you have downloaded the package, select the package and load. 
-```r
-library(dkanr)
-```
+And the development version from [GitHub](https://github.com/) with:
 
-## Getting started with dkanr
+``` r
+# install.packages("devtools")
+devtools::install_github("tonyfujs/dkanr")
+```
+## Example
 
 ![](inst/dkanr_gif.gif)
 
@@ -36,3 +35,4 @@ To learn more about the features and functionalities of the package, view the Ge
 ```r
 browseVignettes(package = "dkanr")
 ```
+

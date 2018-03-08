@@ -1,5 +1,5 @@
 Package: dkanr
-Title: R client for the DKAN API
+Title: R Client for the DKAN API
 Version: 0.1.0
 Authors@R: c(
     person("Tony", "Fujs",
@@ -12,7 +12,7 @@ Authors@R: c(
         role = "aut",
         email = "drkarthi@umich.edu")
     )
-Description: Client for the DKAN API (https://dkan.readthedocs.io/en/latest/apis/index.html).
+Description: Client for the DKAN API (<https://dkan.readthedocs.io/en/latest/apis/index.html>).
     Provides functions to facilitate access to the DKAN API, including the DKAN REST API (metadata),
     and the DKAN Datastore API (data).
 License: MIT + file LICENSE
