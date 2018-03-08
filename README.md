@@ -33,6 +33,8 @@ library(dkanr)
 
 ## Getting started with dkanr
 
+![](inst/dkanr_gif.gif)
+
 To learn more about the features and functionalities of the package, view the Getting Started with dkanr [vignette](https://github.com/tonyfujs/dkanr/blob/master/vignettes/getting_started_with_dkanr.Rmd) for basic guidelines on how to use the package.
 
 ```r
