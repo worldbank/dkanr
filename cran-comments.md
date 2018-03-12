@@ -8,16 +8,6 @@
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs. 
-
-There was 1 NOTE:
-
-* checking for portable file names ... NOTE
-Found the following non-portable file paths:
-dkanr/tests/testthat/newdatacatalogstg.worldbank.org/api/dataset/node/126574/attach_file-552d9f-POST.json
-... 152 lines ...
-dkanr/tests/testthat/tests/testthat/newdatacatalogstg.worldbank.org/api/dataset/node/126574/attach_file-552d9f-POST.json
-
-These files are used for unit testing functions that make API calls.
+0 errors | 0 warnings | 0 notes
 
 * This is a new release.
