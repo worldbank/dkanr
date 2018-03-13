@@ -5,9 +5,6 @@ output:
  rmarkdown::html_vignette:
     toc: true
     keep_md: yes
- rmarkdown::md_document:
-    toc: true
-    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{Introduction to dkanr}
   %\VignetteEncoding{UTF-8}
