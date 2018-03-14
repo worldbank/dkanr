@@ -1,9 +1,11 @@
+# dkanr  <img src="man/figures/dkanr_hex.PNG" align="right" />  
+
+
 [![Travis-CI Build Status](https://travis-ci.org/tonyfujs/dkanr.svg?branch=master)](https://travis-ci.org/tonyfujs/dkanr)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tonyfujs/dkanr?branch=master&svg=true)](https://ci.appveyor.com/project/tonyfujs/dkanr)
 [![Coverage status](https://codecov.io/gh/tonyfujs/dkanr/branch/master/graph/badge.svg)](https://codecov.io/github/tonyfujs/dkanr?branch=master)
 
-
-# dkanr  <img src="man/figures/logo.png" align="right" />
+## Overview
 
 [DKAN](https://getdkan.org/) is an open data platform that enables publication and consumption of open data.
 
