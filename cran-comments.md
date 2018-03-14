@@ -1,3 +1,11 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Removed the redundant "R" in the title
+* Added single quotes to package and software names in title and description
+* Removed title from description
+* Added information about the DKAN API
+
 ## Test environments
 * local OS X install, R 3.4.3
 * ubuntu 14.04 (on travis-ci), R 3.4.3
