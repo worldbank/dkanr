@@ -3,7 +3,7 @@
 [![Coverage status](https://codecov.io/gh/tonyfujs/dkanr/branch/master/graph/badge.svg)](https://codecov.io/github/tonyfujs/dkanr?branch=master)
 
 
-# dkanr  <img src="man/figures/dkanr_hex.PNG" align="right" />
+# dkanr  <img src="man/figures/logo.png" align="right" />
 
 [DKAN](https://getdkan.org/) is an open data platform that enables publication and consumption of open data.
 
