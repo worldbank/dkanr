@@ -1,5 +1,5 @@
 Package: dkanr
-Title: Client for the 'DKAN' 'API'
+Title: Client for the 'DKAN' API
 Version: 0.1.0
 Authors@R: c(
     person("Tony", "Fujs",
@@ -12,7 +12,7 @@ Authors@R: c(
         role = "aut",
         email = "drkarthi@umich.edu")
     )
-Description: Provides functions to facilitate access to the 'DKAN' 'API' (<https://dkan.readthedocs.io/en/latest/apis/index.html>), including the 'DKAN' 'REST' 'API' (metadata), and the 'DKAN' 'datastore' 'API' (data). Includes functions to list, create, retrieve, update, and delete datasets and resources nodes. It also includes functions to search and retrieve data from the 'DKAN' 'datastore'. 
+Description: Provides functions to facilitate access to the 'DKAN' API (<https://dkan.readthedocs.io/en/latest/apis/index.html>), including the 'DKAN' REST API (metadata), and the 'DKAN' datastore API (data). Includes functions to list, create, retrieve, update, and delete datasets and resources nodes. It also includes functions to search and retrieve data from the 'DKAN' datastore. 
 License: MIT + file LICENSE
 Depends:
     R (>= 3.2)

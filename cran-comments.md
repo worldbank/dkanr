@@ -1,10 +1,7 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Removed the redundant "R" in the title
-* Added single quotes to package and software names in title and description
-* Removed title from description
-* Added information about the DKAN API
+* Removed the misplaced single quotes in Title and Description fields of DESCRIPTION file 
 
 ## Test environments
 * local OS X install, R 3.4.3
