@@ -29,8 +29,11 @@ get_resource_url <- function(metadata) {
 
   path <- c(
     metadata[["field_upload"]][["und"]][[1]][["uri"]],
+    metadata[["field_upload"]][["und"]][[1]][["url"]],
     metadata[["field_link_api"]][["und"]][[1]][["url"]],
-    metadata[["field_link_remote_file"]][["und"]][[1]][["url"]]
+    metadata[["field_link_api"]][["und"]][[1]][["uri"]],
+    metadata[["field_link_remote_file"]][["und"]][[1]][["url"]],
+    metadata[["field_link_remote_file"]][["und"]][[1]][["uri"]]
   )
   path <- unname(unlist(path))
 
