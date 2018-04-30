@@ -1,16 +1,14 @@
-## Resubmission
-This is a resubmission. In this version I have:
-
-* Removed the misplaced single quotes in Title and Description fields of DESCRIPTION file 
+## New version submission
+This is a patched version of the original sub-mission.
 
 ## Test environments
-* local OS X install, R 3.4.3
+* local OS X install, R 3.5.0
 * ubuntu 14.04 (on travis-ci), R 3.4.3
 * win-builder (devel)
 * Rhub
   * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
   * Ubuntu Linux 16.04 LTS, R-release, GCC
-  * Debian Linux, R-devel, GCC ASAN/UBSAN
+  * Debian Linux, R-devel, GCC
 
 ## R CMD check results
 
@@ -19,5 +17,3 @@ This is a resubmission. In this version I have:
 * There was one Note:
 checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Tony Fujs <tonyfujs@gmail.com>'
-
-* This is a new release.
