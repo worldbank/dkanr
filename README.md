@@ -5,6 +5,7 @@
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tonyfujs/dkanr?branch=master&svg=true)](https://ci.appveyor.com/project/tonyfujs/dkanr)
 [![Coverage status](https://codecov.io/gh/tonyfujs/dkanr/branch/master/graph/badge.svg)](https://codecov.io/github/tonyfujs/dkanr?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dkanr)](https://cran.r-project.org/package=dkanr)
+[![CRAN](http://cranlogs.r-pkg.org/badges/dkanr?color=brightgreen)
 
 ## Overview
 
