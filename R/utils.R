@@ -342,5 +342,11 @@ fix_download_url <- function(download_url) {
     replacement = base_url
   )
 
+  out <- stringr::str_replace_all(
+    out,
+    pattern = " ",
+    replacement = "%20"
+  )
+
   return(out)
 }

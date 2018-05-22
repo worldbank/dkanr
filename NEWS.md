@@ -1,5 +1,7 @@
 # dkanr 0.1.1.9000
 
+* Fix fix_download_url() to handle URLs with spaces
+
 # dkanr 0.1.1
 
 * fix bug to get_resource_url()
