@@ -1,1 +1,13 @@
-{"sessid":"I6CiN6SyNdgaMdqX8F5Occkp7wlSUiae3BUNcW9-Axs","session_name":"SSESSea72a4c978dd1670e2b2d8df72f13a23","user":{"uid":0,"hostname":"10.176.184.7","roles":{"1":"anonymous user"},"cache":0,"timestamp":1520438382}}
+{
+    "sessid": "J8ldOTKMXZvyMw9Rn8hoLQOHD4OoFgNQeLmsvS61OXc",
+    "session_name": "SSESSea72a4c978dd1670e2b2d8df72f13a23",
+    "user": {
+        "uid": 0,
+        "hostname": "10.184.184.7",
+        "roles": {
+            "1": "anonymous user"
+        },
+        "cache": 0,
+        "timestamp": 1530275882
+    }
+}
