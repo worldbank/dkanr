@@ -1,6 +1,6 @@
 Package: dkanr
 Title: Client for the 'DKAN' API
-Version: 0.1.1.9000
+Version: 0.1.2
 Authors@R: c(
     person("Tony", "Fujs",
         role = c("aut", "cre"),
