@@ -1,5 +1,6 @@
-# dkanr 0.1.1.9000
+# dkanr 0.1.2
 
+* Fix mocking issue with connect_system() in test suite
 * Fix fix_download_url() to handle URLs with spaces
 
 # dkanr 0.1.1
