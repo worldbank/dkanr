@@ -1,5 +1,5 @@
 ## New version submission
-This is a patched version of the original sub-mission.
+Fixed issue with some unit tests that were causing RMDcheck to fail.
 
 ## Test environments
 * local OS X install, R 3.5.0
