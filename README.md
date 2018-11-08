@@ -25,7 +25,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("tonyfujs/dkanr")
+devtools::install_github("worldbank/dkanr")
 ```
 ## Example
 
