@@ -1,9 +1,9 @@
 # dkanr  <img src="man/figures/dkanr_hex.PNG" align="right" />  
 
 
-[![Travis-CI Build Status](https://travis-ci.org/tonyfujs/dkanr.svg?branch=master)](https://travis-ci.org/tonyfujs/dkanr)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tonyfujs/dkanr?branch=master&svg=true)](https://ci.appveyor.com/project/tonyfujs/dkanr)
-[![Coverage status](https://codecov.io/gh/tonyfujs/dkanr/branch/master/graph/badge.svg)](https://codecov.io/github/tonyfujs/dkanr?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/worldbank/dkanr.svg?branch=master)](https://travis-ci.org/worldbank/dkanr)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/worldbank/dkanr?branch=master&svg=true)](https://ci.appveyor.com/project/worldbank/dkanr)
+[![Coverage status](https://codecov.io/gh/worldbank/dkanr/branch/master/graph/badge.svg)](https://codecov.io/github/worldbank/dkanr?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dkanr)](https://cran.r-project.org/package=dkanr)
 ![CRAN](http://cranlogs.r-pkg.org/badges/dkanr?color=brightgreen)
 
