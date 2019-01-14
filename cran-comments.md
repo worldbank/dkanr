@@ -1,5 +1,5 @@
 ## New version submission
-Fixed issue with some unit tests that were causing RMDcheck to fail.
+Fixed LICENSE file
 
 ## Test environments
 * local OS X install, R 3.5.0
