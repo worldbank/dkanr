@@ -4,9 +4,9 @@
 \alias{list_nodes}
 \title{list_nodes}
 \usage{
-list_nodes(url = get_url(), credentials = list(cookie = dkanr::get_cookie(),
-  token = dkanr::get_token()), fields = NULL, filters = NULL,
-  pagesize = NULL, page = NULL, as = "json", ...)
+list_nodes(url = get_url(), credentials = list(cookie =
+  dkanr::get_cookie(), token = dkanr::get_token()), fields = NULL,
+  filters = NULL, pagesize = NULL, page = NULL, as = "json", ...)
 }
 \arguments{
 \item{url}{character: The DKAN site URL}

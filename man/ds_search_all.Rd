@@ -6,8 +6,8 @@
 \usage{
 ds_search_all(resource_id, fields = NULL, filters = NULL,
   num_records = NULL, offset = 0, sort = NULL, q = NULL,
-  url = get_url(), credentials = list(cookie = dkanr::get_cookie(), token =
-  dkanr::get_token()), as = "df")
+  url = get_url(), credentials = list(cookie = dkanr::get_cookie(),
+  token = dkanr::get_token()), as = "df")
 }
 \arguments{
 \item{resource_id}{character: DKAN resource ID}

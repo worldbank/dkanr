@@ -5,7 +5,8 @@
 \title{attach_file_to_node}
 \usage{
 attach_file_to_node(nid, url = get_url(), credentials = list(cookie =
-  dkanr::get_cookie(), token = dkanr::get_token()), file_path, attach = 1)
+  dkanr::get_cookie(), token = dkanr::get_token()), file_path,
+  attach = 1)
 }
 \arguments{
 \item{nid}{character: DKAN resource node ID}

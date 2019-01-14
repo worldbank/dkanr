@@ -29,3 +29,4 @@ dkanr_settings()
 \code{\link{dkanr_setup}},
 \code{\link{get_url}}
 }
+\concept{dkanr settings}

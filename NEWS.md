@@ -1,4 +1,6 @@
-# dkanr 0.1.2.9000
+# dkanr 0.1.3
+
+* Fix attribution in LICENSE file
 
 # dkanr 0.1.2
 
